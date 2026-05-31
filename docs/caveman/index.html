@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Caveman Skill 설명자료</title>
-  <meta name="description" content="AI 에이전트의 반복 작업 답변을 압축하는 Caveman 스킬 설명자료">
+  <meta name="description" content="AI 에이전트 답변을 반복 업무용 신호로 압축하는 Caveman 스킬 설명자료">
   <style>
     :root {
       --ink: #202226;
@@ -59,10 +59,10 @@
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-      gap: clamp(24px, 4vw, 60px);
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+      gap: clamp(24px, 4vw, 58px);
       align-items: center;
-      padding: clamp(32px, 5vw, 76px);
+      padding: clamp(34px, 5vw, 70px);
       opacity: 0;
       transform: translateX(34px);
       pointer-events: none;
@@ -85,9 +85,9 @@
     }
 
     .kicker {
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       color: var(--green);
-      font-size: clamp(13px, 1.2vw, 17px);
+      font-size: clamp(12px, 1.1vw, 16px);
       font-weight: 850;
       text-transform: uppercase;
     }
@@ -101,64 +101,83 @@
     }
 
     h1 {
-      max-width: 11ch;
-      font-size: clamp(28px, 7vw, 108px);
+      max-width: 12ch;
+      font-size: clamp(44px, 7vw, 104px);
     }
 
     h2 {
-      max-width: 14ch;
-      font-size: clamp(24px, 5.6vw, 84px);
+      max-width: 15ch;
+      font-size: clamp(34px, 5.2vw, 78px);
+    }
+
+    h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.18;
+      letter-spacing: 0;
     }
 
     p {
       margin: 0;
       color: var(--muted);
-      font-size: clamp(13px, 1.65vw, 25px);
-      line-height: 1.48;
+      font-size: clamp(14px, 1.45vw, 22px);
+      line-height: 1.46;
       text-wrap: pretty;
     }
 
     .lead {
-      max-width: 760px;
-      margin-top: 28px;
+      max-width: 800px;
+      margin-top: 24px;
       color: #333842;
-      font-size: clamp(15px, 2.1vw, 33px);
+      font-size: clamp(18px, 2.05vw, 31px);
       line-height: 1.42;
     }
 
-    .panel {
+    .small {
+      font-size: clamp(12px, 1.15vw, 17px);
+    }
+
+    .panel,
+    .card,
+    .quote,
+    .step,
+    .note {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: clamp(22px, 3vw, 36px);
+      box-shadow: 0 12px 36px rgba(32, 34, 38, 0.08);
     }
 
-    .before-after {
+    .panel {
+      padding: clamp(22px, 3vw, 36px);
+      box-shadow: var(--shadow);
+    }
+
+    .stack {
       display: grid;
-      gap: 18px;
+      gap: 16px;
     }
 
     .quote {
       min-width: 0;
-      overflow: hidden;
       display: grid;
       gap: 10px;
-      padding: clamp(18px, 2.3vw, 28px);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
+      padding: clamp(16px, 2vw, 26px);
+      overflow: hidden;
     }
 
-    .quote strong {
+    .quote strong,
+    .label {
       color: var(--ink);
-      font-size: clamp(17px, 1.55vw, 23px);
+      font-size: clamp(15px, 1.45vw, 22px);
+      font-weight: 850;
     }
 
     .quote code,
     pre {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: clamp(15px, 1.35vw, 20px);
+      font-size: clamp(12px, 1.2vw, 18px);
       line-height: 1.55;
     }
 
@@ -169,134 +188,138 @@
       overflow-wrap: anywhere;
     }
 
-    .compressed {
-      border-left: 8px solid var(--green);
-    }
-
-    .word-wall {
+    .bad-border {
       border-left: 8px solid var(--red);
     }
 
+    .good-border {
+      border-left: 8px solid var(--green);
+    }
+
+    .blue-border {
+      border-left: 8px solid var(--blue);
+    }
+
+    .yellow-border {
+      border-left: 8px solid var(--yellow);
+    }
+
+    .grid-2,
+    .grid-3,
     .grid-4 {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
-      margin-top: 34px;
+      margin-top: 28px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .card {
-      min-height: 210px;
+      min-height: 170px;
       display: grid;
       align-content: space-between;
-      gap: 20px;
-      padding: clamp(18px, 2vw, 26px);
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 12px 36px rgba(32, 34, 38, 0.08);
-    }
-
-    .mark {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: var(--ink);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 850;
+      gap: 16px;
+      padding: clamp(16px, 1.8vw, 24px);
     }
 
     .card b {
       display: block;
       color: var(--ink);
-      font-size: clamp(22px, 2vw, 30px);
+      font-size: clamp(18px, 1.7vw, 26px);
       line-height: 1.16;
     }
 
     .card span {
       color: var(--muted);
-      font-size: clamp(15px, 1.25vw, 18px);
+      font-size: clamp(13px, 1.15vw, 17px);
       line-height: 1.42;
     }
 
-    .rules {
+    .mark {
+      width: 42px;
+      height: 42px;
       display: grid;
-      gap: 16px;
-    }
-
-    .rule {
-      display: grid;
-      grid-template-columns: 18px 1fr;
-      gap: 16px;
-      padding: 20px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-
-    .bar {
-      width: 18px;
-      min-height: 70px;
+      place-items: center;
       border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .green {
       background: var(--green);
     }
 
-    .rule:nth-child(2) .bar {
+    .red {
+      background: var(--red);
+    }
+
+    .blue {
       background: var(--blue);
     }
 
-    .rule:nth-child(3) .bar {
+    .yellow {
       background: var(--yellow);
     }
 
-    .rule b {
-      display: block;
-      margin-bottom: 6px;
-      font-size: clamp(22px, 2.1vw, 32px);
-      line-height: 1.18;
-    }
-
-    .rule span {
-      color: var(--muted);
-      font-size: clamp(16px, 1.45vw, 21px);
-      line-height: 1.42;
-    }
-
-    .matrix {
+    .flow {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 34px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .matrix .card {
-      min-height: 300px;
+    .step {
+      min-height: 150px;
+      display: grid;
+      align-content: space-between;
+      gap: 14px;
+      padding: 18px;
     }
 
-    .good .mark {
-      background: var(--green);
+    .step strong {
+      font-size: clamp(17px, 1.55vw, 24px);
+      line-height: 1.15;
     }
 
-    .bad .mark {
-      background: var(--red);
+    .step span {
+      color: var(--muted);
+      font-size: clamp(12px, 1.05vw, 16px);
+      line-height: 1.38;
     }
 
     .list {
       display: grid;
-      gap: 12px;
+      gap: 11px;
       margin-top: 18px;
       color: var(--muted);
-      font-size: clamp(17px, 1.45vw, 21px);
+      font-size: clamp(14px, 1.28vw, 19px);
       line-height: 1.38;
+    }
+
+    .list span::before {
+      content: "• ";
+      color: var(--green);
+      font-weight: 850;
     }
 
     .code-panel {
       width: 100%;
+      max-height: 100%;
       overflow: auto;
-      margin-top: 28px;
-      padding: clamp(18px, 2.3vw, 30px);
+      margin-top: 22px;
+      padding: clamp(18px, 2.2vw, 28px);
       border-radius: 8px;
       background: #222721;
       color: #fff8ed;
@@ -304,15 +327,42 @@
       white-space: pre-wrap;
     }
 
+    .recipe {
+      display: grid;
+      gap: 14px;
+    }
+
+    .recipe-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .recipe-row b {
+      color: var(--green);
+      font-size: clamp(14px, 1.2vw, 18px);
+    }
+
+    .recipe-row span {
+      color: var(--muted);
+      font-size: clamp(13px, 1.15vw, 17px);
+      line-height: 1.42;
+    }
+
     .sources {
-      margin-top: 28px;
       display: grid;
       gap: 12px;
+      margin-top: 24px;
     }
 
     .sources a {
       color: var(--blue);
-      font-size: clamp(16px, 1.35vw, 20px);
+      font-size: clamp(14px, 1.25vw, 18px);
       text-decoration-thickness: 2px;
       text-underline-offset: 4px;
     }
@@ -358,7 +408,7 @@
     }
 
     .count {
-      min-width: 72px;
+      min-width: 76px;
       color: var(--muted);
       font-size: 14px;
       font-weight: 850;
@@ -385,70 +435,187 @@
 
     @media (max-width: 940px) {
       .slide {
-        gap: 16px;
-        padding: clamp(14px, 4vw, 30px);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: clamp(14px, 4vw, 28px);
+      }
+
+      .slide.full {
+        grid-template-columns: 1fr;
       }
 
       h1 {
-        font-size: clamp(28px, 8.4vw, 44px);
+        font-size: clamp(26px, 8vw, 42px);
       }
 
       h2 {
-        font-size: clamp(23px, 6.8vw, 38px);
+        font-size: clamp(21px, 6.4vw, 36px);
+      }
+
+      h3 {
+        font-size: 15px;
       }
 
       .lead {
-        font-size: clamp(13px, 4.2vw, 19px);
+        margin-top: 12px;
+        font-size: clamp(12px, 3.8vw, 17px);
       }
 
-      .grid-4 {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 10px;
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .flow {
+        gap: 8px;
+      }
+
+      .card,
+      .step,
+      .quote,
+      .panel {
+        padding: 10px;
       }
 
       .card {
-        min-height: 112px;
-        padding: 12px;
+        min-height: 92px;
       }
 
       .card b,
-      .rule b {
-        font-size: 14px;
-      }
-
-      .card span,
-      .rule span,
-      .list {
-        font-size: 11px;
-      }
-
-      .mark {
-        width: 28px;
-        height: 28px;
+      .step strong,
+      .quote strong,
+      .label {
         font-size: 12px;
       }
 
-      .quote {
-        padding: 12px;
+      .card span,
+      .step span,
+      .recipe-row span,
+      .list,
+      p {
+        font-size: 10px;
       }
 
       .quote code,
       pre {
-        font-size: 11px;
+        font-size: 9px;
+      }
+
+      .mark {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+      }
+
+      .recipe-row {
+        grid-template-columns: 46px 1fr;
+        gap: 8px;
+        padding: 8px;
+      }
+
+      .recipe-row b {
+        font-size: 10px;
       }
 
       .nav {
-        bottom: 10px;
         right: 12px;
+        bottom: 10px;
       }
 
       button {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
       }
 
       .count {
-        min-width: 58px;
+        min-width: 60px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        display: block;
+      }
+
+      .deck {
+        width: 100vw;
+        height: 100vh;
+        aspect-ratio: auto;
+      }
+
+      .slide,
+      .slide.full {
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 16px;
+        padding: 28px 20px 96px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(40px, 15vw, 58px);
+      }
+
+      h2 {
+        max-width: 100%;
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p,
+      .lead {
+        font-size: 18px;
+      }
+
+      .kicker {
+        font-size: 13px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .flow {
+        grid-template-columns: 1fr;
+        margin-top: 16px;
+      }
+
+      .card,
+      .step,
+      .quote,
+      .panel {
+        min-height: auto;
+        padding: 16px;
+      }
+
+      .card b,
+      .step strong,
+      .quote strong,
+      .label,
+      .recipe-row b {
+        font-size: 18px;
+      }
+
+      .card span,
+      .step span,
+      .recipe-row span,
+      .list {
+        font-size: 15px;
+      }
+
+      .quote code,
+      pre {
+        font-size: 13px;
+      }
+
+      .recipe-row {
+        grid-template-columns: 64px 1fr;
+      }
+
+      .nav {
+        right: 50%;
+        transform: translateX(50%);
       }
     }
   </style>
@@ -457,46 +624,86 @@
   <main class="deck" aria-label="Caveman Skill 설명자료">
     <section class="slide active" data-title="Cover">
       <div>
-        <p class="kicker">Agent Skill</p>
+        <p class="kicker">Agent Skill Explainer</p>
         <h1>Caveman Skill</h1>
-        <p class="lead">AI 에이전트 답변을 반복 업무용 신호로 압축하는 커뮤니케이션 스킬.</p>
+        <p class="lead">AI 에이전트 답변을 짧고 선명한 업무 신호로 압축하는 커뮤니케이션 스킬.</p>
       </div>
-      <div class="before-after">
-        <div class="quote word-wall">
-          <strong>일반 답변</strong>
-          <code>이 문제는 인증 미들웨어에서 토큰 만료 시간을 비교하는 조건이 잘못되어 발생한 것으로 보입니다.</code>
-        </div>
-        <div class="quote compressed">
-          <strong>Caveman 답변</strong>
-          <code>Auth middleware bug. Expiry check use &lt; not &lt;=. Fix condition.</code>
+      <div class="panel">
+        <h3>처음 보는 사람을 위한 핵심</h3>
+        <div class="list">
+          <span>AI가 장황하게 말할 때 쓰는 답변 압축 모드</span>
+          <span>코드, 에러, 경로 같은 기술 정보는 그대로 유지</span>
+          <span>반복 업무에서 결론과 다음 행동을 빠르게 확인</span>
         </div>
       </div>
     </section>
 
-    <section class="slide full" data-title="Why">
+    <section class="slide" data-title="Pain Point">
       <div>
-        <p class="kicker">Why It Matters</p>
-        <h2>반복 작업에는 짧은 결론이 더 강하다</h2>
-        <div class="grid-4">
+        <p class="kicker">01. Problem</p>
+        <h2>AI 답변은 기본적으로 길다</h2>
+        <p class="lead">처음 배울 때는 친절한 설명이 좋지만, 반복 작업에서는 긴 말이 업무 속도를 늦춘다.</p>
+      </div>
+      <div class="stack">
+        <div class="quote bad-border">
+          <strong>반복해서 보게 되는 문장</strong>
+          <code>물론입니다. 이 문제를 해결하기 위해서는 먼저 가능한 원인을 살펴보고...</code>
+        </div>
+        <div class="quote bad-border">
+          <strong>실제 필요한 정보</strong>
+          <code>무엇이 문제인가? 어디를 고치나? 어떻게 검증하나?</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide full" data-title="Definition">
+      <div>
+        <p class="kicker">02. Definition</p>
+        <h2>Caveman은 말투 장난이 아니다</h2>
+        <div class="grid-3">
           <div class="card">
-            <span class="mark">1</span>
-            <b>상태 보고</b>
-            <span>완료, 막힘, 다음 행동이 바로 보인다.</span>
+            <span class="mark green">1</span>
+            <b>출력 형식 규칙</b>
+            <span>에이전트가 답변할 때 어떤 말을 버리고 어떤 정보를 남길지 정한다.</span>
           </div>
           <div class="card">
-            <span class="mark">2</span>
-            <b>코드 리뷰</b>
-            <span>문제 위치와 수정 방향이 흐려지지 않는다.</span>
+            <span class="mark blue">2</span>
+            <b>반복 업무 최적화</b>
+            <span>매번 긴 설명을 읽지 않고 결론, 원인, 조치만 빠르게 본다.</span>
           </div>
           <div class="card">
-            <span class="mark">3</span>
-            <b>오류 분석</b>
-            <span>원인, 영향, 검증 명령을 짧게 연결한다.</span>
+            <span class="mark yellow">3</span>
+            <b>정확도 유지</b>
+            <span>기술 용어, 코드 블록, 에러 메시지는 줄이지 않고 그대로 둔다.</span>
           </div>
-          <div class="card">
-            <span class="mark">4</span>
-            <b>토큰 절약</b>
-            <span>부가 효과. 핵심은 비용보다 작업 속도다.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide full" data-title="Mental Model">
+      <div>
+        <p class="kicker">03. Mental Model</p>
+        <h2>에이전트 답변의 마지막 필터</h2>
+        <div class="flow">
+          <div class="step">
+            <span class="mark">A</span>
+            <strong>사용자 요청</strong>
+            <span>버그 설명, 리뷰 요청, 테스트 실패 로그</span>
+          </div>
+          <div class="step">
+            <span class="mark">B</span>
+            <strong>에이전트 판단</strong>
+            <span>원인 추정, 수정 방향, 검증 방법 정리</span>
+          </div>
+          <div class="step">
+            <span class="mark green">C</span>
+            <strong>Caveman 필터</strong>
+            <span>예의 문구, 반복 표현, 장황한 연결어 제거</span>
+          </div>
+          <div class="step">
+            <span class="mark blue">D</span>
+            <strong>압축 답변</strong>
+            <span>문제 -> 원인 -> 조치 -> 검증</span>
           </div>
         </div>
       </div>
@@ -504,86 +711,223 @@
 
     <section class="slide" data-title="Rules">
       <div>
-        <p class="kicker">Rules</p>
-        <h2>말투는 줄이고 정보는 남긴다</h2>
-        <p class="lead">좋은 압축은 설명을 없애는 게 아니라 잡음을 제거한다.</p>
+        <p class="kicker">04. Rules</p>
+        <h2>버릴 것과 남길 것</h2>
+        <p class="lead">핵심은 짧게 말하는 것이 아니라, 정보 밀도를 높이는 것이다.</p>
       </div>
-      <div class="rules">
-        <div class="rule">
-          <span class="bar"></span>
-          <div>
-            <b>제거</b>
-            <span>예의 문구, 반복 표현, 불필요한 hedging, 긴 접속어.</span>
+      <div class="grid-2">
+        <div class="card bad-border">
+          <b>버린다</b>
+          <div class="list">
+            <span>물론입니다, 좋은 질문입니다</span>
+            <span>기본적으로, 실제로, 간단히 말해</span>
+            <span>확실하지 않지만 아마도 같은 완충어</span>
+            <span>같은 의미를 반복하는 문장</span>
           </div>
         </div>
-        <div class="rule">
-          <span class="bar"></span>
-          <div>
-            <b>유지</b>
-            <span>기술 용어, 코드, 에러 메시지, 경로, 명령어.</span>
-          </div>
-        </div>
-        <div class="rule">
-          <span class="bar"></span>
-          <div>
-            <b>형식</b>
-            <span>문제 -> 원인 -> 수정 -> 검증 순서로 짧게 정리.</span>
+        <div class="card good-border">
+          <b>남긴다</b>
+          <div class="list">
+            <span>파일명, 함수명, 라인 번호</span>
+            <span>에러 메시지 원문</span>
+            <span>명령어와 코드 블록</span>
+            <span>원인, 영향, 다음 행동</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide full" data-title="Use Cases">
+    <section class="slide" data-title="Before After">
       <div>
-        <p class="kicker">Use Cases</p>
-        <h2>어디에 좋고 어디에 나쁜가</h2>
-        <div class="matrix">
-          <div class="card good">
-            <span class="mark">✓</span>
-            <b>좋은 상황</b>
-            <div class="list">
-              <span>코드 리뷰</span>
-              <span>테스트 실패 요약</span>
-              <span>git diff 상태 보고</span>
-              <span>PR 코멘트 초안</span>
-              <span>터미널 오류 해석</span>
-            </div>
+        <p class="kicker">05. Example</p>
+        <h2>같은 내용, 다른 밀도</h2>
+        <p class="lead">Caveman은 정보를 삭제하지 않는다. 포장을 줄인다.</p>
+      </div>
+      <div class="stack">
+        <div class="quote bad-border">
+          <strong>일반 답변</strong>
+          <code>이 문제는 인증 미들웨어에서 토큰 만료 시간을 비교하는 조건이 잘못되어 발생한 것으로 보입니다. 현재 코드에서는 만료 시점과 현재 시각이 같은 경우를 처리하지 못하므로 조건을 수정해야 합니다.</code>
+        </div>
+        <div class="quote good-border">
+          <strong>Caveman 답변</strong>
+          <code>Auth middleware bug. Expiry check use &lt; not &lt;=. Fix condition. Add boundary test.</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Bug Example">
+      <div>
+        <p class="kicker">06. Bug Triage</p>
+        <h2>오류 분석 예시</h2>
+        <p class="lead">터미널 로그를 붙였을 때는 원인과 검증 명령이 바로 보여야 한다.</p>
+      </div>
+      <pre class="code-panel">Error: DATABASE_URL is not defined
+
+Root cause: deploy secret missing.
+Impact: app boot fail before DB connect.
+Fix: add DATABASE_URL in hosting env.
+Verify: restart app, run health check.</pre>
+    </section>
+
+    <section class="slide" data-title="Review Example">
+      <div>
+        <p class="kicker">07. Code Review</p>
+        <h2>코드 리뷰 예시</h2>
+        <p class="lead">리뷰는 친절한 문장보다 위치, 위험, 수정 방향이 더 중요하다.</p>
+      </div>
+      <div class="stack">
+        <div class="quote good-border">
+          <strong>Caveman 리뷰</strong>
+          <code>L42: user null 가능. guard 필요.
+L88: retry 무한 루프 위험. max attempt 추가.
+L130: prod config default 없음 -> deploy crash 가능.</code>
+        </div>
+        <div class="quote blue-border">
+          <strong>좋은 이유</strong>
+          <code>파일을 다시 열기 전에 무엇을 고쳐야 하는지 바로 보인다.</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Status Example">
+      <div>
+        <p class="kicker">08. Status Update</p>
+        <h2>상태 보고 예시</h2>
+        <p class="lead">작업 중간 보고는 길수록 읽히지 않는다. 완료, 막힘, 다음만 있으면 된다.</p>
+      </div>
+      <pre class="code-panel">Done: README update, Pages enabled.
+Verified: link 200 OK, slide nav works.
+Blocked: none.
+Next: review wording, then add next skill deck.</pre>
+    </section>
+
+    <section class="slide" data-title="Trigger">
+      <div>
+        <p class="kicker">09. How To Use</p>
+        <h2>어떻게 켜고 끄나</h2>
+        <p class="lead">스킬은 보통 사용자의 짧은 신호로 켜진다. 한 번 켜지면 명시적으로 끌 때까지 유지된다.</p>
+      </div>
+      <div class="recipe">
+        <div class="recipe-row">
+          <b>켜기</b>
+          <span>`$caveman`, `caveman mode`, `less tokens`, `be brief`</span>
+        </div>
+        <div class="recipe-row">
+          <b>유지</b>
+          <span>다음 답변부터 계속 압축 모드. 매번 다시 말할 필요 없음.</span>
+        </div>
+        <div class="recipe-row">
+          <b>끄기</b>
+          <span>`stop caveman`, `normal mode`, `자세히 설명해줘`</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Exception">
+      <div>
+        <p class="kicker">10. Safety</p>
+        <h2>항상 짧으면 위험하다</h2>
+        <p class="lead">좋은 스킬은 예외 규칙을 가진다. 오해 비용이 큰 순간에는 압축을 풀어야 한다.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card yellow-border">
+          <b>압축 풀기</b>
+          <div class="list">
+            <span>삭제, 결제, 권한 변경 같은 되돌리기 어려운 작업</span>
+            <span>보안/법무/개인정보 관련 안내</span>
+            <span>처음 배우는 사람에게 개념을 설명하는 상황</span>
           </div>
-          <div class="card bad">
-            <span class="mark">!</span>
-            <b>주의할 상황</b>
-            <div class="list">
-              <span>초보자 교육</span>
-              <span>보안/법무/고객 문안</span>
-              <span>되돌릴 수 없는 명령 실행</span>
-              <span>복잡한 의사결정 설명</span>
-              <span>감정적 피드백</span>
-            </div>
+        </div>
+        <div class="card good-border">
+          <b>다시 압축</b>
+          <div class="list">
+            <span>위험 설명과 확인이 끝난 뒤</span>
+            <span>사용자가 다시 짧게 말하라고 했을 때</span>
+            <span>반복 작업 상태 보고로 돌아왔을 때</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Pattern">
+    <section class="slide full" data-title="Use Case Matrix">
       <div>
-        <p class="kicker">Pattern</p>
-        <h2>실무에서는 이 형태가 좋다</h2>
-        <p class="lead">짧아도 순서는 유지해야 오해가 줄어든다.</p>
+        <p class="kicker">11. Use Case Matrix</p>
+        <h2>언제 쓰면 좋은가</h2>
+        <div class="grid-4">
+          <div class="card">
+            <span class="mark green">✓</span>
+            <b>코드 리뷰</b>
+            <span>문제 위치와 수정 방향 중심.</span>
+          </div>
+          <div class="card">
+            <span class="mark green">✓</span>
+            <b>CI 실패</b>
+            <span>실패 원인, 영향, 재실행 명령 중심.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">!</span>
+            <b>초보자 교육</b>
+            <span>너무 짧으면 배경 이해가 끊김.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">!</span>
+            <b>고객 문안</b>
+            <span>친절함과 맥락 설명이 필요.</span>
+          </div>
+        </div>
       </div>
-      <pre class="code-panel">Root cause: env var missing.
-Impact: DB connect fail.
-Fix: add DATABASE_URL in deploy secret.
-Verify: run health check.</pre>
     </section>
 
-    <section class="slide" data-title="Fact Check">
+    <section class="slide" data-title="Recipe">
       <div>
-        <p class="kicker">Fact Check</p>
-        <h2>75% 절감보다 중요한 것</h2>
-        <p class="lead">공개 자료는 출력 토큰 절감을 강조하지만, 교육 메시지는 비용보다 작업 속도와 인지 부하 감소에 둔다.</p>
+        <p class="kicker">12. Practical Recipe</p>
+        <h2>팀에서 쓸 때의 요청문</h2>
+        <p class="lead">처음부터 “짧게”만 말하지 말고 출력 구조를 같이 지정하면 품질이 안정된다.</p>
+      </div>
+      <pre class="code-panel">Use caveman mode for this task.
+Format:
+1. Root cause
+2. Risk
+3. Fix
+4. Verify command
+
+Keep exact error text and file paths.</pre>
+    </section>
+
+    <section class="slide" data-title="Skill Design">
+      <div>
+        <p class="kicker">13. Skill Design Lesson</p>
+        <h2>좋은 스킬은 작고 선명하다</h2>
+        <p class="lead">Caveman이 좋은 이유는 기능이 많아서가 아니라, 하나의 반복 문제를 확실히 해결하기 때문이다.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="mark green">1</span>
+          <b>좁은 목적</b>
+          <span>답변 압축이라는 한 가지 일에 집중.</span>
+        </div>
+        <div class="card">
+          <span class="mark blue">2</span>
+          <b>명확한 예시</b>
+          <span>나쁜 답변과 좋은 답변의 차이가 바로 보임.</span>
+        </div>
+        <div class="card">
+          <span class="mark yellow">3</span>
+          <b>예외 규칙</b>
+          <span>위험한 순간에는 짧게 말하지 않도록 제한.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Close">
+      <div>
+        <p class="kicker">14. Takeaway</p>
+        <h2>핵심은 “짧게”가 아니라 “신호만 남기기”</h2>
+        <p class="lead">Caveman은 AI를 무뚝뚝하게 만드는 스킬이 아니다. 반복 업무에서 사람이 빨리 판단할 수 있게 답변을 업무용 신호로 바꾸는 스킬이다.</p>
       </div>
       <div class="panel">
-        <p>결론: Caveman은 말투 장난이 아니라, 반복적인 에이전트 작업에서 답변을 업무용 신호로 압축하는 방식이다.</p>
+        <h3>한 문장 요약</h3>
+        <p>Caveman = 반복 작업용 출력 압축 전략. 결론, 원인, 조치, 검증만 남긴다.</p>
         <div class="sources">
           <a href="https://github.com/JuliusBrussee/caveman">JuliusBrussee/caveman</a>
           <a href="https://code.claude.com/docs/en/skills">Claude Code Skills docs</a>
@@ -596,7 +940,7 @@ Verify: run health check.</pre>
 
   <nav class="nav" aria-label="슬라이드 이동">
     <button type="button" id="prev" title="이전 슬라이드" aria-label="이전 슬라이드">‹</button>
-    <span class="count" id="count">1 / 6</span>
+    <span class="count" id="count">1 / 15</span>
     <button type="button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드">›</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>
