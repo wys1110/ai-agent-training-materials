@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caveman Skill 설명자료</title>
+  <meta name="description" content="AI 에이전트의 반복 작업 답변을 압축하는 Caveman 스킬 설명자료">
+  <style>
+    :root {
+      --ink: #202226;
+      --muted: #626a76;
+      --paper: #f6f2ea;
+      --surface: #fffdf8;
+      --line: #ddd4c8;
+      --green: #2f7656;
+      --red: #c24d42;
+      --blue: #336f9e;
+      --yellow: #c68b2d;
+      --shadow: 0 20px 58px rgba(32, 34, 38, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    body {
+      min-width: 320px;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(47, 118, 86, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(47, 118, 86, 0.07) 1px, transparent 1px),
+        var(--paper);
+      background-size: 44px 44px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: clamp(24px, 4vw, 60px);
+      align-items: center;
+      padding: clamp(32px, 5vw, 76px);
+      opacity: 0;
+      transform: translateX(34px);
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .slide > * {
+      min-width: 0;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide.full {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--green);
+      font-size: clamp(13px, 1.2vw, 17px);
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      line-height: 1.04;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h1 {
+      max-width: 11ch;
+      font-size: clamp(52px, 8vw, 116px);
+    }
+
+    h2 {
+      max-width: 14ch;
+      font-size: clamp(42px, 6.6vw, 90px);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(18px, 1.8vw, 26px);
+      line-height: 1.48;
+      text-wrap: pretty;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-top: 28px;
+      color: #333842;
+      font-size: clamp(22px, 2.4vw, 34px);
+      line-height: 1.42;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 3vw, 36px);
+    }
+
+    .before-after {
+      display: grid;
+      gap: 18px;
+    }
+
+    .quote {
+      min-width: 0;
+      overflow: hidden;
+      display: grid;
+      gap: 10px;
+      padding: clamp(18px, 2.3vw, 28px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .quote strong {
+      color: var(--ink);
+      font-size: clamp(17px, 1.55vw, 23px);
+    }
+
+    .quote code,
+    pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(15px, 1.35vw, 20px);
+      line-height: 1.55;
+    }
+
+    .quote code {
+      display: block;
+      color: var(--muted);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .compressed {
+      border-left: 8px solid var(--green);
+    }
+
+    .word-wall {
+      border-left: 8px solid var(--red);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .card {
+      min-height: 210px;
+      display: grid;
+      align-content: space-between;
+      gap: 20px;
+      padding: clamp(18px, 2vw, 26px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 36px rgba(32, 34, 38, 0.08);
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 850;
+    }
+
+    .card b {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(22px, 2vw, 30px);
+      line-height: 1.16;
+    }
+
+    .card span {
+      color: var(--muted);
+      font-size: clamp(15px, 1.25vw, 18px);
+      line-height: 1.42;
+    }
+
+    .rules {
+      display: grid;
+      gap: 16px;
+    }
+
+    .rule {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 16px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .bar {
+      width: 18px;
+      min-height: 70px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .rule:nth-child(2) .bar {
+      background: var(--blue);
+    }
+
+    .rule:nth-child(3) .bar {
+      background: var(--yellow);
+    }
+
+    .rule b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: clamp(22px, 2.1vw, 32px);
+      line-height: 1.18;
+    }
+
+    .rule span {
+      color: var(--muted);
+      font-size: clamp(16px, 1.45vw, 21px);
+      line-height: 1.42;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .matrix .card {
+      min-height: 300px;
+    }
+
+    .good .mark {
+      background: var(--green);
+    }
+
+    .bad .mark {
+      background: var(--red);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: clamp(17px, 1.45vw, 21px);
+      line-height: 1.38;
+    }
+
+    .code-panel {
+      width: 100%;
+      overflow: auto;
+      margin-top: 28px;
+      padding: clamp(18px, 2.3vw, 30px);
+      border-radius: 8px;
+      background: #222721;
+      color: #fff8ed;
+      box-shadow: var(--shadow);
+      white-space: pre-wrap;
+    }
+
+    .sources {
+      margin-top: 28px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .sources a {
+      color: var(--blue);
+      font-size: clamp(16px, 1.35vw, 20px);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .nav {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      background: rgba(255, 253, 248, 0.86);
+      border: 1px solid rgba(221, 212, 200, 0.94);
+      border-radius: 999px;
+      box-shadow: 0 14px 42px rgba(32, 34, 38, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 23px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(47, 118, 86, 0.28);
+      outline-offset: 2px;
+    }
+
+    .count {
+      min-width: 72px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 11;
+      width: 100%;
+      height: 5px;
+      background: rgba(32, 34, 38, 0.12);
+    }
+
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width 180ms ease;
+    }
+
+    @media (max-width: 940px) {
+      body {
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .deck {
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .slide {
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 24px;
+        padding: 30px 20px 92px;
+        transform: none;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(38px, 10.5vw, 46px);
+        line-height: 1.08;
+      }
+
+      h2 {
+        max-width: 100%;
+        font-size: clamp(38px, 10.5vw, 52px);
+        line-height: 1.08;
+      }
+
+      .lead {
+        max-width: 100%;
+        font-size: clamp(19px, 5.2vw, 23px);
+      }
+
+      .grid-4,
+      .matrix {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .matrix .card {
+        min-height: auto;
+      }
+
+      .nav {
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Caveman Skill 설명자료">
+    <section class="slide active" data-title="Cover">
+      <div>
+        <p class="kicker">Agent Skill</p>
+        <h1>Caveman Skill</h1>
+        <p class="lead">AI 에이전트 답변을 반복 업무용 신호로 압축하는 커뮤니케이션 스킬.</p>
+      </div>
+      <div class="before-after">
+        <div class="quote word-wall">
+          <strong>일반 답변</strong>
+          <code>이 문제는 인증 미들웨어에서 토큰 만료 시간을 비교하는 조건이 잘못되어 발생한 것으로 보입니다.</code>
+        </div>
+        <div class="quote compressed">
+          <strong>Caveman 답변</strong>
+          <code>Auth middleware bug. Expiry check use &lt; not &lt;=. Fix condition.</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide full" data-title="Why">
+      <div>
+        <p class="kicker">Why It Matters</p>
+        <h2>반복 작업에는 짧은 결론이 더 강하다</h2>
+        <div class="grid-4">
+          <div class="card">
+            <span class="mark">1</span>
+            <b>상태 보고</b>
+            <span>완료, 막힘, 다음 행동이 바로 보인다.</span>
+          </div>
+          <div class="card">
+            <span class="mark">2</span>
+            <b>코드 리뷰</b>
+            <span>문제 위치와 수정 방향이 흐려지지 않는다.</span>
+          </div>
+          <div class="card">
+            <span class="mark">3</span>
+            <b>오류 분석</b>
+            <span>원인, 영향, 검증 명령을 짧게 연결한다.</span>
+          </div>
+          <div class="card">
+            <span class="mark">4</span>
+            <b>토큰 절약</b>
+            <span>부가 효과. 핵심은 비용보다 작업 속도다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Rules">
+      <div>
+        <p class="kicker">Rules</p>
+        <h2>말투는 줄이고 정보는 남긴다</h2>
+        <p class="lead">좋은 압축은 설명을 없애는 게 아니라 잡음을 제거한다.</p>
+      </div>
+      <div class="rules">
+        <div class="rule">
+          <span class="bar"></span>
+          <div>
+            <b>제거</b>
+            <span>예의 문구, 반복 표현, 불필요한 hedging, 긴 접속어.</span>
+          </div>
+        </div>
+        <div class="rule">
+          <span class="bar"></span>
+          <div>
+            <b>유지</b>
+            <span>기술 용어, 코드, 에러 메시지, 경로, 명령어.</span>
+          </div>
+        </div>
+        <div class="rule">
+          <span class="bar"></span>
+          <div>
+            <b>형식</b>
+            <span>문제 -> 원인 -> 수정 -> 검증 순서로 짧게 정리.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide full" data-title="Use Cases">
+      <div>
+        <p class="kicker">Use Cases</p>
+        <h2>어디에 좋고 어디에 나쁜가</h2>
+        <div class="matrix">
+          <div class="card good">
+            <span class="mark">✓</span>
+            <b>좋은 상황</b>
+            <div class="list">
+              <span>코드 리뷰</span>
+              <span>테스트 실패 요약</span>
+              <span>git diff 상태 보고</span>
+              <span>PR 코멘트 초안</span>
+              <span>터미널 오류 해석</span>
+            </div>
+          </div>
+          <div class="card bad">
+            <span class="mark">!</span>
+            <b>주의할 상황</b>
+            <div class="list">
+              <span>초보자 교육</span>
+              <span>보안/법무/고객 문안</span>
+              <span>되돌릴 수 없는 명령 실행</span>
+              <span>복잡한 의사결정 설명</span>
+              <span>감정적 피드백</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Pattern">
+      <div>
+        <p class="kicker">Pattern</p>
+        <h2>실무에서는 이 형태가 좋다</h2>
+        <p class="lead">짧아도 순서는 유지해야 오해가 줄어든다.</p>
+      </div>
+      <pre class="code-panel">Root cause: env var missing.
+Impact: DB connect fail.
+Fix: add DATABASE_URL in deploy secret.
+Verify: run health check.</pre>
+    </section>
+
+    <section class="slide" data-title="Fact Check">
+      <div>
+        <p class="kicker">Fact Check</p>
+        <h2>75% 절감보다 중요한 것</h2>
+        <p class="lead">공개 자료는 출력 토큰 절감을 강조하지만, 교육 메시지는 비용보다 작업 속도와 인지 부하 감소에 둔다.</p>
+      </div>
+      <div class="panel">
+        <p>결론: Caveman은 말투 장난이 아니라, 반복적인 에이전트 작업에서 답변을 업무용 신호로 압축하는 방식이다.</p>
+        <div class="sources">
+          <a href="https://github.com/JuliusBrussee/caveman">JuliusBrussee/caveman</a>
+          <a href="https://code.claude.com/docs/en/skills">Claude Code Skills docs</a>
+          <a href="https://openai.com/academy/skills/">OpenAI Academy - Using skills</a>
+          <a href="https://www.implicator.ai/caveman-claude-code-skill-cuts-output-20-your-bill-barely-notices-2/">Critical review of cost-saving claims</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="nav" aria-label="슬라이드 이동">
+    <button type="button" id="prev" title="이전 슬라이드" aria-label="이전 슬라이드">‹</button>
+    <span class="count" id="count">1 / 6</span>
+    <button type="button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드">›</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const count = document.querySelector("#count");
+    const progress = document.querySelector("#progress");
+    const prev = document.querySelector("#prev");
+    const next = document.querySelector("#next");
+    let index = 0;
+
+    function update(target) {
+      index = Math.max(0, Math.min(slides.length - 1, target));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === index);
+      });
+      count.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      const hash = `slide-${index + 1}`;
+      if (location.hash !== `#${hash}`) {
+        history.replaceState(null, "", `#${hash}`);
+      }
+    }
+
+    prev.addEventListener("click", () => update(index - 1));
+    next.addEventListener("click", () => update(index + 1));
+    window.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        update(index + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        update(index - 1);
+      }
+      if (event.key === "Home") update(0);
+      if (event.key === "End") update(slides.length - 1);
+    });
+
+    const hashMatch = location.hash.match(/slide-(\d+)/);
+    update(hashMatch ? Number(hashMatch[1]) - 1 : 0);
+  </script>
+</body>
+</html>
