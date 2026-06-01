@@ -253,6 +253,11 @@
       overflow-wrap: anywhere;
     }
 
+    .codebox.dense {
+      font-size: clamp(8.5px, 0.82vw, 12px);
+      line-height: 1.38;
+    }
+
     .codebox strong {
       color: #8bd3a7;
       font-weight: 850;
@@ -407,6 +412,11 @@
         font-size: 8.5px;
       }
 
+      .codebox.dense {
+        font-size: 7.5px;
+        line-height: 1.32;
+      }
+
       .mark {
         width: 24px;
         height: 24px;
@@ -499,6 +509,13 @@
       .codebox {
         font-size: 12px;
         max-height: none;
+      }
+
+      .codebox.dense {
+        max-height: min(58vh, 520px);
+        overflow: auto;
+        font-size: 10px;
+        line-height: 1.34;
       }
 
       .nav {
@@ -813,9 +830,51 @@ Yes: ...
 When to pause or override the skill.</pre>
     </section>
 
+    <section class="slide" data-title="Korean Code Version">
+      <div>
+        <p class="kicker">15. Korean Version</p>
+        <h2>한글로 옮기면 이런 코드가 된다</h2>
+        <p class="lead">실제 배포는 영어 원문이 더 범용적이지만, 교육용으로는 같은 구조를 한국어로 보면 더 빨리 이해된다.</p>
+      </div>
+      <pre class="codebox dense">---
+name: caveman-ko
+description: &gt;
+  초압축 커뮤니케이션 모드.
+  군더더기, 관사, 예의 문구를 줄여 토큰 사용량을 낮춘다.
+  기술적 정확도는 그대로 유지한다.
+  사용자가 "caveman mode", "짧게", "토큰 줄여",
+  "간단히", "$caveman"처럼 말할 때 사용한다.
+---
+
+똑똑한 원시인처럼 짧게 답한다. 기술 내용은 유지하고 군더더기만 제거한다.
+
+## 상태 유지
+
+한 번 켜지면 모든 답변에 적용한다. 여러 턴이 지나도 유지한다.
+사용자가 "stop caveman", "normal mode", "자세히 설명해줘"라고 말할 때만 끈다.
+
+## 규칙
+
+버린다: 관사, filler, 예의 문구, 불필요한 완충 표현.
+허용한다: 문장 조각, 짧은 동의어, DB/auth/config 같은 약어.
+활용한다: X -&gt; Y 형태의 인과 표현.
+
+유지한다: 기술 용어, 코드 블록, 에러 메시지, 파일 경로.
+패턴: `[대상] [동작] [이유]. [다음 조치].`
+
+Not: "물론입니다. 이 문제를 해결하기 위해 먼저 가능한 원인을 살펴보면..."
+
+Yes: "Auth middleware bug. Expiry check use `&lt;` not `&lt;=`. Fix condition."
+
+## 예외
+
+보안 경고, 되돌릴 수 없는 작업 확인, 순서가 중요한 다단계 절차에서는 잠깐 자세히 쓴다.
+명확히 설명한 뒤 다시 caveman으로 돌아간다.</pre>
+    </section>
+
     <section class="slide" data-title="Takeaway">
       <div>
-        <p class="kicker">15. Takeaway</p>
+        <p class="kicker">16. Takeaway</p>
         <h2>좋은 스킬 markdown은 작동 설명서다</h2>
         <p class="lead">Caveman의 강점은 짧은 말투가 아니라, 트리거·상태 유지·규칙·예시·예외가 한 파일 안에 선명하게 들어 있다는 점이다.</p>
       </div>
@@ -828,7 +887,7 @@ When to pause or override the skill.</pre>
 
   <nav class="nav" aria-label="슬라이드 이동">
     <button type="button" id="prev" title="이전 슬라이드" aria-label="이전 슬라이드">‹</button>
-    <span class="count" id="count">1 / 16</span>
+    <span class="count" id="count">1 / 17</span>
     <button type="button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드">›</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>
