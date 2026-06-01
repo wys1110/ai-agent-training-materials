@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Caveman Skill 설명자료</title>
-  <meta name="description" content="AI 에이전트 답변을 반복 업무용 신호로 압축하는 Caveman 스킬 설명자료">
+  <title>Caveman Skill Markdown 해설</title>
+  <meta name="description" content="실제 Caveman SKILL.md를 기준으로 에이전트 스킬 형식을 설명하는 자료">
   <style>
     :root {
       --ink: #202226;
@@ -16,6 +16,7 @@
       --red: #c24d42;
       --blue: #336f9e;
       --yellow: #c68b2d;
+      --code: #20241f;
       --shadow: 0 20px 58px rgba(32, 34, 38, 0.16);
     }
 
@@ -59,7 +60,7 @@
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
       gap: clamp(24px, 4vw, 58px);
       align-items: center;
       padding: clamp(34px, 5vw, 70px);
@@ -87,13 +88,14 @@
     .kicker {
       margin: 0 0 14px;
       color: var(--green);
-      font-size: clamp(12px, 1.1vw, 16px);
+      font-size: clamp(12px, 1.08vw, 16px);
       font-weight: 850;
       text-transform: uppercase;
     }
 
     h1,
-    h2 {
+    h2,
+    h3 {
       margin: 0;
       line-height: 1.04;
       letter-spacing: 0;
@@ -106,22 +108,20 @@
     }
 
     h2 {
-      max-width: 15ch;
-      font-size: clamp(34px, 5.2vw, 78px);
+      max-width: 14ch;
+      font-size: clamp(34px, 5vw, 76px);
     }
 
     h3 {
-      margin: 0;
       color: var(--ink);
       font-size: clamp(20px, 2vw, 30px);
       line-height: 1.18;
-      letter-spacing: 0;
     }
 
     p {
       margin: 0;
       color: var(--muted);
-      font-size: clamp(14px, 1.45vw, 22px);
+      font-size: clamp(14px, 1.42vw, 21px);
       line-height: 1.46;
       text-wrap: pretty;
     }
@@ -130,18 +130,12 @@
       max-width: 800px;
       margin-top: 24px;
       color: #333842;
-      font-size: clamp(18px, 2.05vw, 31px);
+      font-size: clamp(18px, 2.02vw, 30px);
       line-height: 1.42;
-    }
-
-    .small {
-      font-size: clamp(12px, 1.15vw, 17px);
     }
 
     .panel,
     .card,
-    .quote,
-    .step,
     .note {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -150,58 +144,13 @@
     }
 
     .panel {
-      padding: clamp(22px, 3vw, 36px);
+      padding: clamp(22px, 3vw, 34px);
       box-shadow: var(--shadow);
     }
 
     .stack {
       display: grid;
       gap: 16px;
-    }
-
-    .quote {
-      min-width: 0;
-      display: grid;
-      gap: 10px;
-      padding: clamp(16px, 2vw, 26px);
-      overflow: hidden;
-    }
-
-    .quote strong,
-    .label {
-      color: var(--ink);
-      font-size: clamp(15px, 1.45vw, 22px);
-      font-weight: 850;
-    }
-
-    .quote code,
-    pre {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: clamp(12px, 1.2vw, 18px);
-      line-height: 1.55;
-    }
-
-    .quote code {
-      display: block;
-      color: var(--muted);
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .bad-border {
-      border-left: 8px solid var(--red);
-    }
-
-    .good-border {
-      border-left: 8px solid var(--green);
-    }
-
-    .blue-border {
-      border-left: 8px solid var(--blue);
-    }
-
-    .yellow-border {
-      border-left: 8px solid var(--yellow);
     }
 
     .grid-2,
@@ -225,23 +174,23 @@
     }
 
     .card {
-      min-height: 170px;
+      min-height: 165px;
       display: grid;
       align-content: space-between;
-      gap: 16px;
+      gap: 14px;
       padding: clamp(16px, 1.8vw, 24px);
     }
 
     .card b {
       display: block;
       color: var(--ink);
-      font-size: clamp(18px, 1.7vw, 26px);
+      font-size: clamp(18px, 1.65vw, 25px);
       line-height: 1.16;
     }
 
     .card span {
       color: var(--muted);
-      font-size: clamp(13px, 1.15vw, 17px);
+      font-size: clamp(13px, 1.12vw, 17px);
       line-height: 1.42;
     }
 
@@ -261,42 +210,16 @@
       background: var(--green);
     }
 
-    .red {
-      background: var(--red);
-    }
-
     .blue {
       background: var(--blue);
     }
 
+    .red {
+      background: var(--red);
+    }
+
     .yellow {
       background: var(--yellow);
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 30px;
-    }
-
-    .step {
-      min-height: 150px;
-      display: grid;
-      align-content: space-between;
-      gap: 14px;
-      padding: 18px;
-    }
-
-    .step strong {
-      font-size: clamp(17px, 1.55vw, 24px);
-      line-height: 1.15;
-    }
-
-    .step span {
-      color: var(--muted);
-      font-size: clamp(12px, 1.05vw, 16px);
-      line-height: 1.38;
     }
 
     .list {
@@ -304,7 +227,7 @@
       gap: 11px;
       margin-top: 18px;
       color: var(--muted);
-      font-size: clamp(14px, 1.28vw, 19px);
+      font-size: clamp(14px, 1.25vw, 19px);
       line-height: 1.38;
     }
 
@@ -314,57 +237,62 @@
       font-weight: 850;
     }
 
-    .code-panel {
-      width: 100%;
+    .codebox {
+      min-width: 0;
       max-height: 100%;
       overflow: auto;
-      margin-top: 22px;
-      padding: clamp(18px, 2.2vw, 28px);
+      padding: clamp(16px, 2vw, 26px);
       border-radius: 8px;
-      background: #222721;
+      background: var(--code);
       color: #fff8ed;
       box-shadow: var(--shadow);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(11px, 1.03vw, 15px);
+      line-height: 1.52;
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
     }
 
-    .recipe {
-      display: grid;
-      gap: 14px;
+    .codebox strong {
+      color: #8bd3a7;
+      font-weight: 850;
     }
 
-    .recipe-row {
+    .codebox .muted {
+      color: #b9c2b9;
+    }
+
+    .codebox .warn {
+      color: #f2c477;
+    }
+
+    .callout {
       display: grid;
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 12px 1fr;
       gap: 14px;
-      align-items: start;
-      padding: 16px;
+      align-items: stretch;
+      padding: 18px;
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 8px;
     }
 
-    .recipe-row b {
-      color: var(--green);
-      font-size: clamp(14px, 1.2vw, 18px);
+    .bar {
+      border-radius: 999px;
+      background: var(--green);
     }
 
-    .recipe-row span {
+    .callout b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: clamp(17px, 1.45vw, 22px);
+    }
+
+    .callout span {
       color: var(--muted);
-      font-size: clamp(13px, 1.15vw, 17px);
+      font-size: clamp(13px, 1.12vw, 17px);
       line-height: 1.42;
-    }
-
-    .sources {
-      display: grid;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .sources a {
-      color: var(--blue);
-      font-size: clamp(14px, 1.25vw, 18px);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
     }
 
     .nav {
@@ -436,7 +364,7 @@
     @media (max-width: 940px) {
       .slide {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+        gap: 12px;
         padding: clamp(14px, 4vw, 28px);
       }
 
@@ -445,11 +373,11 @@
       }
 
       h1 {
-        font-size: clamp(26px, 8vw, 42px);
+        font-size: clamp(28px, 8vw, 42px);
       }
 
       h2 {
-        font-size: clamp(21px, 6.4vw, 36px);
+        font-size: clamp(22px, 6.2vw, 36px);
       }
 
       h3 {
@@ -461,57 +389,27 @@
         font-size: clamp(12px, 3.8vw, 17px);
       }
 
-      .grid-2,
-      .grid-3,
-      .grid-4,
-      .flow {
-        gap: 8px;
-      }
-
-      .card,
-      .step,
-      .quote,
-      .panel {
-        padding: 10px;
-      }
-
-      .card {
-        min-height: 92px;
-      }
-
-      .card b,
-      .step strong,
-      .quote strong,
-      .label {
-        font-size: 12px;
-      }
-
+      p,
       .card span,
-      .step span,
-      .recipe-row span,
-      .list,
-      p {
+      .callout span,
+      .list {
         font-size: 10px;
       }
 
-      .quote code,
-      pre {
-        font-size: 9px;
+      .card,
+      .panel,
+      .callout {
+        padding: 10px;
+      }
+
+      .codebox {
+        padding: 10px;
+        font-size: 8.5px;
       }
 
       .mark {
         width: 24px;
         height: 24px;
-        font-size: 10px;
-      }
-
-      .recipe-row {
-        grid-template-columns: 46px 1fr;
-        gap: 8px;
-        padding: 8px;
-      }
-
-      .recipe-row b {
         font-size: 10px;
       }
 
@@ -575,42 +473,32 @@
 
       .grid-2,
       .grid-3,
-      .grid-4,
-      .flow {
+      .grid-4 {
         grid-template-columns: 1fr;
         margin-top: 16px;
       }
 
       .card,
-      .step,
-      .quote,
-      .panel {
+      .panel,
+      .callout {
         min-height: auto;
         padding: 16px;
       }
 
       .card b,
-      .step strong,
-      .quote strong,
-      .label,
-      .recipe-row b {
+      .callout b {
         font-size: 18px;
       }
 
       .card span,
-      .step span,
-      .recipe-row span,
+      .callout span,
       .list {
         font-size: 15px;
       }
 
-      .quote code,
-      pre {
-        font-size: 13px;
-      }
-
-      .recipe-row {
-        grid-template-columns: 64px 1fr;
+      .codebox {
+        font-size: 12px;
+        max-height: none;
       }
 
       .nav {
@@ -621,326 +509,326 @@
   </style>
 </head>
 <body>
-  <main class="deck" aria-label="Caveman Skill 설명자료">
+  <main class="deck" aria-label="Caveman Skill Markdown 해설">
     <section class="slide active" data-title="Cover">
       <div>
-        <p class="kicker">Agent Skill Explainer</p>
-        <h1>Caveman Skill</h1>
-        <p class="lead">AI 에이전트 답변을 짧고 선명한 업무 신호로 압축하는 커뮤니케이션 스킬.</p>
+        <p class="kicker">Skill Markdown Explainer</p>
+        <h1>Caveman SKILL.md</h1>
+        <p class="lead">실제 스킬 markdown을 보고, 어떤 구조가 에이전트 행동을 바꾸는지 이해한다.</p>
       </div>
       <div class="panel">
-        <h3>처음 보는 사람을 위한 핵심</h3>
+        <h3>이번 자료의 방향</h3>
         <div class="list">
-          <span>AI가 장황하게 말할 때 쓰는 답변 압축 모드</span>
-          <span>코드, 에러, 경로 같은 기술 정보는 그대로 유지</span>
-          <span>반복 업무에서 결론과 다음 행동을 빠르게 확인</span>
+          <span>추상 설명보다 실제 markdown 원문을 먼저 본다.</span>
+          <span>각 블록이 하는 역할을 하나씩 해설한다.</span>
+          <span>다른 스킬을 만들 때 재사용할 형식을 뽑아낸다.</span>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Pain Point">
+    <section class="slide" data-title="Original 1">
       <div>
-        <p class="kicker">01. Problem</p>
-        <h2>AI 답변은 기본적으로 길다</h2>
-        <p class="lead">처음 배울 때는 친절한 설명이 좋지만, 반복 작업에서는 긴 말이 업무 속도를 늦춘다.</p>
+        <p class="kicker">01. 실제 Markdown</p>
+        <h2>스킬은 Markdown 파일 하나로 시작한다</h2>
+        <p class="lead">처음 `---` 블록은 메타데이터다. 에이전트가 이 스킬을 언제 불러야 하는지 판단하는 힌트가 된다.</p>
+      </div>
+      <pre class="codebox">---
+name: caveman
+description: &gt;
+  Ultra-compressed communication mode. Cuts token usage ~75% by dropping
+  filler, articles, and pleasantries while keeping full technical accuracy.
+  Use when user says "caveman mode", "talk like caveman", "use caveman",
+  "less tokens", "be brief", or invokes /caveman.
+---</pre>
+    </section>
+
+    <section class="slide" data-title="Frontmatter">
+      <div>
+        <p class="kicker">02. Frontmatter</p>
+        <h2>`name`과 `description`이 입구다</h2>
+        <p class="lead">스킬은 이름보다 설명이 중요하다. 설명에 트리거 상황이 구체적으로 있어야 에이전트가 정확히 고른다.</p>
       </div>
       <div class="stack">
-        <div class="quote bad-border">
-          <strong>반복해서 보게 되는 문장</strong>
-          <code>물론입니다. 이 문제를 해결하기 위해서는 먼저 가능한 원인을 살펴보고...</code>
+        <div class="callout">
+          <span class="bar"></span>
+          <div>
+            <b>`name: caveman`</b>
+            <span>사람이 부르는 짧은 이름. 링크나 목록에서 식별하는 역할.</span>
+          </div>
         </div>
-        <div class="quote bad-border">
-          <strong>실제 필요한 정보</strong>
-          <code>무엇이 문제인가? 어디를 고치나? 어떻게 검증하나?</code>
+        <div class="callout">
+          <span class="bar"></span>
+          <div>
+            <b>`description`</b>
+            <span>언제 써야 하는지 설명. `less tokens`, `be brief`, `/caveman`처럼 실제 사용자 표현을 넣는다.</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="slide full" data-title="Definition">
+    <section class="slide" data-title="Core Instruction">
       <div>
-        <p class="kicker">02. Definition</p>
-        <h2>Caveman은 말투 장난이 아니다</h2>
-        <div class="grid-3">
+        <p class="kicker">03. Body</p>
+        <h2>첫 문장은 스킬의 헌법이다</h2>
+        <p class="lead">메타데이터 다음에는 실제 행동 지시가 온다. Caveman은 목표를 한 줄로 강하게 고정한다.</p>
+      </div>
+      <div class="stack">
+        <pre class="codebox">Respond terse like smart caveman.
+All technical substance stay.
+Only fluff die.</pre>
+        <div class="panel">
+          <h3>해설</h3>
+          <p>짧게 말하되 기술 내용은 빼지 말라는 균형이 들어 있다. 이 한 줄이 없으면 단순히 불친절한 답변이 될 수 있다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Persistence">
+      <div>
+        <p class="kicker">04. Persistence</p>
+        <h2>켜진 뒤 언제까지 유지할지 정한다</h2>
+        <p class="lead">스킬이 한 번만 적용되는지, 계속 유지되는지 명시해야 대화 중간에 흐트러지지 않는다.</p>
+      </div>
+      <pre class="codebox">## Persistence
+
+ACTIVE EVERY RESPONSE once triggered.
+No revert after many turns.
+No filler drift.
+Still active if unsure.
+Off only when user says "stop caveman" or "normal mode".</pre>
+    </section>
+
+    <section class="slide full" data-title="Persistence Meaning">
+      <div>
+        <p class="kicker">05. Persistence 해설</p>
+        <h2>좋은 스킬은 상태 전환을 명확히 한다</h2>
+        <div class="grid-4">
           <div class="card">
             <span class="mark green">1</span>
-            <b>출력 형식 규칙</b>
-            <span>에이전트가 답변할 때 어떤 말을 버리고 어떤 정보를 남길지 정한다.</span>
+            <b>언제 켜짐</b>
+            <span>사용자가 caveman 관련 표현을 말했을 때.</span>
           </div>
           <div class="card">
             <span class="mark blue">2</span>
-            <b>반복 업무 최적화</b>
-            <span>매번 긴 설명을 읽지 않고 결론, 원인, 조치만 빠르게 본다.</span>
+            <b>얼마나 유지</b>
+            <span>명시적으로 끄기 전까지 계속 적용.</span>
           </div>
           <div class="card">
             <span class="mark yellow">3</span>
-            <b>정확도 유지</b>
-            <span>기술 용어, 코드 블록, 에러 메시지는 줄이지 않고 그대로 둔다.</span>
+            <b>흔들림 방지</b>
+            <span>여러 턴 뒤에도 장황한 말투로 돌아가지 않음.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">4</span>
+            <b>종료 조건</b>
+            <span>`stop caveman`, `normal mode`가 명확한 off 신호.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide full" data-title="Mental Model">
+    <section class="slide" data-title="Rules Drop">
       <div>
-        <p class="kicker">03. Mental Model</p>
-        <h2>에이전트 답변의 마지막 필터</h2>
-        <div class="flow">
-          <div class="step">
-            <span class="mark">A</span>
-            <strong>사용자 요청</strong>
-            <span>버그 설명, 리뷰 요청, 테스트 실패 로그</span>
-          </div>
-          <div class="step">
-            <span class="mark">B</span>
-            <strong>에이전트 판단</strong>
-            <span>원인 추정, 수정 방향, 검증 방법 정리</span>
-          </div>
-          <div class="step">
-            <span class="mark green">C</span>
-            <strong>Caveman 필터</strong>
-            <span>예의 문구, 반복 표현, 장황한 연결어 제거</span>
-          </div>
-          <div class="step">
-            <span class="mark blue">D</span>
-            <strong>압축 답변</strong>
-            <span>문제 -> 원인 -> 조치 -> 검증</span>
-          </div>
+        <p class="kicker">06. Rules</p>
+        <h2>무엇을 줄일지 구체화한다</h2>
+        <p class="lead">“짧게 말해”보다 강한 이유는 삭제 대상이 구체적이기 때문이다.</p>
+      </div>
+      <pre class="codebox">## Rules
+
+Drop: articles (a/an/the), filler (just/really/basically/actually/simply),
+pleasantries (sure/certainly/of course/happy to), hedging.
+Fragments OK.
+Short synonyms (big not extensive, fix not "implement a solution for").
+Abbreviate common terms (DB/auth/config/req/res/fn/impl).
+Strip conjunctions.
+Use arrows for causality (X -&gt; Y).
+One word when one word enough.</pre>
+    </section>
+
+    <section class="slide" data-title="Rules Keep">
+      <div>
+        <p class="kicker">07. Guardrails</p>
+        <h2>줄이면 안 되는 것도 정한다</h2>
+        <p class="lead">압축 스킬의 핵심은 정보 손실 방지다. Caveman은 정확히 남길 것을 별도로 지정한다.</p>
+      </div>
+      <pre class="codebox">Technical terms stay exact.
+Code blocks unchanged.
+Errors quoted exact.
+
+Pattern: `[thing] [action] [reason]. [next step].`</pre>
+    </section>
+
+    <section class="slide" data-title="Pattern">
+      <div>
+        <p class="kicker">08. Output Pattern</p>
+        <h2>형식이 있으면 짧아도 이해된다</h2>
+        <p class="lead">짧은 답변은 순서가 무너지면 위험하다. 그래서 패턴이 필요하다.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <span class="mark green">1</span>
+          <b>thing</b>
+          <span>무엇이 문제인지 먼저 말한다.</span>
+        </div>
+        <div class="card">
+          <span class="mark blue">2</span>
+          <b>action</b>
+          <span>무슨 일이 일어났는지 말한다.</span>
+        </div>
+        <div class="card">
+          <span class="mark yellow">3</span>
+          <b>reason</b>
+          <span>왜 그런지 짧게 붙인다.</span>
+        </div>
+        <div class="card">
+          <span class="mark red">4</span>
+          <b>next step</b>
+          <span>바로 할 일을 제시한다.</span>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Rules">
+    <section class="slide" data-title="Not Yes">
       <div>
-        <p class="kicker">04. Rules</p>
-        <h2>버릴 것과 남길 것</h2>
-        <p class="lead">핵심은 짧게 말하는 것이 아니라, 정보 밀도를 높이는 것이다.</p>
+        <p class="kicker">09. Example Pair</p>
+        <h2>나쁜 답변과 좋은 답변을 같이 둔다</h2>
+        <p class="lead">스킬 문서에는 추상 규칙보다 before/after가 강하다. 에이전트가 원하는 톤을 바로 배운다.</p>
       </div>
-      <div class="grid-2">
-        <div class="card bad-border">
-          <b>버린다</b>
-          <div class="list">
-            <span>물론입니다, 좋은 질문입니다</span>
-            <span>기본적으로, 실제로, 간단히 말해</span>
-            <span>확실하지 않지만 아마도 같은 완충어</span>
-            <span>같은 의미를 반복하는 문장</span>
-          </div>
-        </div>
-        <div class="card good-border">
-          <b>남긴다</b>
-          <div class="list">
-            <span>파일명, 함수명, 라인 번호</span>
-            <span>에러 메시지 원문</span>
-            <span>명령어와 코드 블록</span>
-            <span>원인, 영향, 다음 행동</span>
-          </div>
-        </div>
-      </div>
+      <pre class="codebox">Not:
+"Sure! I'd be happy to help you with that.
+The issue you're experiencing is likely caused by..."
+
+Yes:
+"Bug in auth middleware.
+Token expiry check use `&lt;` not `&lt;=`.
+Fix:"</pre>
     </section>
 
-    <section class="slide" data-title="Before After">
+    <section class="slide" data-title="Examples">
       <div>
-        <p class="kicker">05. Example</p>
-        <h2>같은 내용, 다른 밀도</h2>
-        <p class="lead">Caveman은 정보를 삭제하지 않는다. 포장을 줄인다.</p>
+        <p class="kicker">10. Examples</p>
+        <h2>짧은 예시가 동작 범위를 만든다</h2>
+        <p class="lead">React와 DB 예시가 들어가 있어 코딩 대화에서도 이 스킬이 적용됨을 보여준다.</p>
       </div>
-      <div class="stack">
-        <div class="quote bad-border">
-          <strong>일반 답변</strong>
-          <code>이 문제는 인증 미들웨어에서 토큰 만료 시간을 비교하는 조건이 잘못되어 발생한 것으로 보입니다. 현재 코드에서는 만료 시점과 현재 시각이 같은 경우를 처리하지 못하므로 조건을 수정해야 합니다.</code>
-        </div>
-        <div class="quote good-border">
-          <strong>Caveman 답변</strong>
-          <code>Auth middleware bug. Expiry check use &lt; not &lt;=. Fix condition. Add boundary test.</code>
-        </div>
-      </div>
-    </section>
+      <pre class="codebox">### Examples
 
-    <section class="slide" data-title="Bug Example">
-      <div>
-        <p class="kicker">06. Bug Triage</p>
-        <h2>오류 분석 예시</h2>
-        <p class="lead">터미널 로그를 붙였을 때는 원인과 검증 명령이 바로 보여야 한다.</p>
-      </div>
-      <pre class="code-panel">Error: DATABASE_URL is not defined
+**"Why React component re-render?"**
 
-Root cause: deploy secret missing.
-Impact: app boot fail before DB connect.
-Fix: add DATABASE_URL in hosting env.
-Verify: restart app, run health check.</pre>
-    </section>
+&gt; Inline obj prop -&gt; new ref -&gt; re-render. `useMemo`.
 
-    <section class="slide" data-title="Review Example">
-      <div>
-        <p class="kicker">07. Code Review</p>
-        <h2>코드 리뷰 예시</h2>
-        <p class="lead">리뷰는 친절한 문장보다 위치, 위험, 수정 방향이 더 중요하다.</p>
-      </div>
-      <div class="stack">
-        <div class="quote good-border">
-          <strong>Caveman 리뷰</strong>
-          <code>L42: user null 가능. guard 필요.
-L88: retry 무한 루프 위험. max attempt 추가.
-L130: prod config default 없음 -> deploy crash 가능.</code>
-        </div>
-        <div class="quote blue-border">
-          <strong>좋은 이유</strong>
-          <code>파일을 다시 열기 전에 무엇을 고쳐야 하는지 바로 보인다.</code>
-        </div>
-      </div>
-    </section>
+**"Explain database connection pooling."**
 
-    <section class="slide" data-title="Status Example">
-      <div>
-        <p class="kicker">08. Status Update</p>
-        <h2>상태 보고 예시</h2>
-        <p class="lead">작업 중간 보고는 길수록 읽히지 않는다. 완료, 막힘, 다음만 있으면 된다.</p>
-      </div>
-      <pre class="code-panel">Done: README update, Pages enabled.
-Verified: link 200 OK, slide nav works.
-Blocked: none.
-Next: review wording, then add next skill deck.</pre>
-    </section>
-
-    <section class="slide" data-title="Trigger">
-      <div>
-        <p class="kicker">09. How To Use</p>
-        <h2>어떻게 켜고 끄나</h2>
-        <p class="lead">스킬은 보통 사용자의 짧은 신호로 켜진다. 한 번 켜지면 명시적으로 끌 때까지 유지된다.</p>
-      </div>
-      <div class="recipe">
-        <div class="recipe-row">
-          <b>켜기</b>
-          <span>`$caveman`, `caveman mode`, `less tokens`, `be brief`</span>
-        </div>
-        <div class="recipe-row">
-          <b>유지</b>
-          <span>다음 답변부터 계속 압축 모드. 매번 다시 말할 필요 없음.</span>
-        </div>
-        <div class="recipe-row">
-          <b>끄기</b>
-          <span>`stop caveman`, `normal mode`, `자세히 설명해줘`</span>
-        </div>
-      </div>
+&gt; Pool = reuse DB conn. Skip handshake -&gt; fast under load.</pre>
     </section>
 
     <section class="slide" data-title="Exception">
       <div>
-        <p class="kicker">10. Safety</p>
-        <h2>항상 짧으면 위험하다</h2>
-        <p class="lead">좋은 스킬은 예외 규칙을 가진다. 오해 비용이 큰 순간에는 압축을 풀어야 한다.</p>
+        <p class="kicker">11. Exception</p>
+        <h2>예외 규칙이 있어야 실무에서 안전하다</h2>
+        <p class="lead">항상 짧게만 말하면 위험하다. 되돌릴 수 없는 작업, 보안, 복잡한 절차는 압축을 잠깐 푼다.</p>
       </div>
-      <div class="grid-2">
-        <div class="card yellow-border">
-          <b>압축 풀기</b>
-          <div class="list">
-            <span>삭제, 결제, 권한 변경 같은 되돌리기 어려운 작업</span>
-            <span>보안/법무/개인정보 관련 안내</span>
-            <span>처음 배우는 사람에게 개념을 설명하는 상황</span>
-          </div>
-        </div>
-        <div class="card good-border">
-          <b>다시 압축</b>
-          <div class="list">
-            <span>위험 설명과 확인이 끝난 뒤</span>
-            <span>사용자가 다시 짧게 말하라고 했을 때</span>
-            <span>반복 작업 상태 보고로 돌아왔을 때</span>
-          </div>
-        </div>
-      </div>
+      <pre class="codebox">## Auto-Clarity Exception
+
+Drop caveman temporarily for:
+security warnings,
+irreversible action confirmations,
+multi-step sequences where fragment order risks misread,
+user asks to clarify or repeats question.
+Resume caveman after clear part done.</pre>
     </section>
 
-    <section class="slide full" data-title="Use Case Matrix">
+    <section class="slide" data-title="Exception Example">
       <div>
-        <p class="kicker">11. Use Case Matrix</p>
-        <h2>언제 쓰면 좋은가</h2>
+        <p class="kicker">12. Exception Example</p>
+        <h2>위험한 순간에는 자세히 경고한다</h2>
+        <p class="lead">Caveman 스킬 안에서도 삭제 같은 위험 작업은 명확한 경고를 우선한다.</p>
+      </div>
+      <pre class="codebox">Example -- destructive op:
+
+&gt; **Warning:** This will permanently delete all rows in the `users` table
+&gt; and cannot be undone.
+&gt;
+&gt; ```sql
+&gt; DROP TABLE users;
+&gt; ```
+&gt;
+&gt; Caveman resume. Verify backup exist first.</pre>
+    </section>
+
+    <section class="slide full" data-title="Markdown Anatomy">
+      <div>
+        <p class="kicker">13. Anatomy</p>
+        <h2>Caveman에서 뽑는 스킬 작성 형식</h2>
         <div class="grid-4">
           <div class="card">
-            <span class="mark green">✓</span>
-            <b>코드 리뷰</b>
-            <span>문제 위치와 수정 방향 중심.</span>
+            <span class="mark green">A</span>
+            <b>Metadata</b>
+            <span>name, description, trigger phrases.</span>
           </div>
           <div class="card">
-            <span class="mark green">✓</span>
-            <b>CI 실패</b>
-            <span>실패 원인, 영향, 재실행 명령 중심.</span>
+            <span class="mark blue">B</span>
+            <b>Core Rule</b>
+            <span>스킬이 바꿀 행동을 한 문장으로 고정.</span>
           </div>
           <div class="card">
-            <span class="mark red">!</span>
-            <b>초보자 교육</b>
-            <span>너무 짧으면 배경 이해가 끊김.</span>
+            <span class="mark yellow">C</span>
+            <b>Operating Rules</b>
+            <span>해야 할 것, 버릴 것, 유지할 것.</span>
           </div>
           <div class="card">
-            <span class="mark red">!</span>
-            <b>고객 문안</b>
-            <span>친절함과 맥락 설명이 필요.</span>
+            <span class="mark red">D</span>
+            <b>Examples</b>
+            <span>나쁜 출력과 좋은 출력, 예외 상황.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Recipe">
+    <section class="slide" data-title="Reusable Template">
       <div>
-        <p class="kicker">12. Practical Recipe</p>
-        <h2>팀에서 쓸 때의 요청문</h2>
-        <p class="lead">처음부터 “짧게”만 말하지 말고 출력 구조를 같이 지정하면 품질이 안정된다.</p>
+        <p class="kicker">14. Template</p>
+        <h2>다른 스킬도 이 뼈대로 시작한다</h2>
+        <p class="lead">Caveman 형식은 작고 선명한 스킬을 만들 때 재사용하기 좋다.</p>
       </div>
-      <pre class="code-panel">Use caveman mode for this task.
-Format:
-1. Root cause
-2. Risk
-3. Fix
-4. Verify command
+      <pre class="codebox">---
+name: short-skill-name
+description: &gt;
+  What this skill does.
+  Use when user says X, asks for Y, or needs Z.
+---
 
-Keep exact error text and file paths.</pre>
+Core behavior in 1-3 direct sentences.
+
+## Persistence
+When active, when inactive, how to stop.
+
+## Rules
+Do this. Avoid that. Preserve these exact details.
+
+## Examples
+Not: ...
+Yes: ...
+
+## Exceptions
+When to pause or override the skill.</pre>
     </section>
 
-    <section class="slide" data-title="Skill Design">
+    <section class="slide" data-title="Takeaway">
       <div>
-        <p class="kicker">13. Skill Design Lesson</p>
-        <h2>좋은 스킬은 작고 선명하다</h2>
-        <p class="lead">Caveman이 좋은 이유는 기능이 많아서가 아니라, 하나의 반복 문제를 확실히 해결하기 때문이다.</p>
-      </div>
-      <div class="grid-3">
-        <div class="card">
-          <span class="mark green">1</span>
-          <b>좁은 목적</b>
-          <span>답변 압축이라는 한 가지 일에 집중.</span>
-        </div>
-        <div class="card">
-          <span class="mark blue">2</span>
-          <b>명확한 예시</b>
-          <span>나쁜 답변과 좋은 답변의 차이가 바로 보임.</span>
-        </div>
-        <div class="card">
-          <span class="mark yellow">3</span>
-          <b>예외 규칙</b>
-          <span>위험한 순간에는 짧게 말하지 않도록 제한.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Close">
-      <div>
-        <p class="kicker">14. Takeaway</p>
-        <h2>핵심은 “짧게”가 아니라 “신호만 남기기”</h2>
-        <p class="lead">Caveman은 AI를 무뚝뚝하게 만드는 스킬이 아니다. 반복 업무에서 사람이 빨리 판단할 수 있게 답변을 업무용 신호로 바꾸는 스킬이다.</p>
+        <p class="kicker">15. Takeaway</p>
+        <h2>좋은 스킬 markdown은 작동 설명서다</h2>
+        <p class="lead">Caveman의 강점은 짧은 말투가 아니라, 트리거·상태 유지·규칙·예시·예외가 한 파일 안에 선명하게 들어 있다는 점이다.</p>
       </div>
       <div class="panel">
         <h3>한 문장 요약</h3>
-        <p>Caveman = 반복 작업용 출력 압축 전략. 결론, 원인, 조치, 검증만 남긴다.</p>
-        <div class="sources">
-          <a href="https://github.com/JuliusBrussee/caveman">JuliusBrussee/caveman</a>
-          <a href="https://code.claude.com/docs/en/skills">Claude Code Skills docs</a>
-          <a href="https://openai.com/academy/skills/">OpenAI Academy - Using skills</a>
-          <a href="https://www.implicator.ai/caveman-claude-code-skill-cuts-output-20-your-bill-barely-notices-2/">Critical review of cost-saving claims</a>
-        </div>
+        <p>스킬은 “프롬프트 모음”이 아니라, 에이전트가 특정 상황에서 반복적으로 같은 품질의 행동을 하도록 만드는 markdown 규격이다.</p>
       </div>
     </section>
   </main>
 
   <nav class="nav" aria-label="슬라이드 이동">
     <button type="button" id="prev" title="이전 슬라이드" aria-label="이전 슬라이드">‹</button>
-    <span class="count" id="count">1 / 15</span>
+    <span class="count" id="count">1 / 16</span>
     <button type="button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드">›</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>
