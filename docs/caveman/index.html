@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Caveman Skill Markdown 해설</title>
-  <meta name="description" content="실제 Caveman SKILL.md를 기준으로 에이전트 스킬 형식을 설명하는 자료">
+  <title>Caveman — 팀 소개</title>
+  <meta name="description" content="Claude Code Caveman 스킬 팀 소개 자료 — 설치·사용법·활용 시나리오">
   <style>
     :root {
       --ink: #202226;
@@ -526,387 +526,289 @@
   </style>
 </head>
 <body>
-  <main class="deck" aria-label="Caveman Skill Markdown 해설">
-    <section class="slide active" data-title="Cover">
+  <main class=”deck” aria-label=”Caveman 팀 소개”>
+
+    <!-- 01. Cover -->
+    <section class=”slide active” data-title=”Cover”>
       <div>
-        <p class="kicker">Skill Markdown Explainer</p>
-        <h1>Caveman SKILL.md</h1>
-        <p class="lead">실제 스킬 markdown을 보고, 어떤 구조가 에이전트 행동을 바꾸는지 이해한다.</p>
+        <p class=”kicker”>Claude Code Skill 소개</p>
+        <h1>Caveman</h1>
+        <p class=”lead”>AI 답변을 더 짧고 빠르게. 기술 정보는 그대로, 군더더기만 제거한다.</p>
       </div>
-      <div class="panel">
-        <h3>이번 자료의 방향</h3>
-        <div class="list">
-          <span>추상 설명보다 실제 markdown 원문을 먼저 본다.</span>
-          <span>각 블록이 하는 역할을 하나씩 해설한다.</span>
-          <span>다른 스킬을 만들 때 재사용할 형식을 뽑아낸다.</span>
+      <div class=”panel”>
+        <h3>오늘 다룰 것</h3>
+        <div class=”list”>
+          <span>Caveman이 뭔지, 왜 쓰는지</span>
+          <span>트리거 방법과 실제 답변 차이</span>
+          <span>안전 장치와 지속성</span>
+          <span>설치 방법과 팀 활용 시나리오</span>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Original 1">
+    <!-- 02. Problem -->
+    <section class=”slide” data-title=”Problem”>
       <div>
-        <p class="kicker">01. 실제 Markdown</p>
-        <h2>스킬은 Markdown 파일 하나로 시작한다</h2>
-        <p class="lead">처음 `---` 블록은 메타데이터다. 에이전트가 이 스킬을 언제 불러야 하는지 판단하는 힌트가 된다.</p>
+        <p class=”kicker”>01. 문제</p>
+        <h2>AI 답변, 꼭 이렇게 길어야 할까?</h2>
+        <p class=”lead”>실제 정보보다 서론·인사·완충 표현이 더 많다. 읽는 시간과 토큰이 낭비된다.</p>
       </div>
-      <pre class="codebox">---
-name: caveman
-description: &gt;
-  Ultra-compressed communication mode. Cuts token usage ~75% by dropping
-  filler, articles, and pleasantries while keeping full technical accuracy.
-  Use when user says "caveman mode", "talk like caveman", "use caveman",
-  "less tokens", "be brief", or invokes /caveman.
----</pre>
+      <pre class=”codebox”><span class=”warn”>일반 모드 — 실제 정보는 절반도 안 된다</span>
+
+물론입니다! 도움을 드리게 되어 정말 기쁩니다.
+말씀하신 문제를 해결하기 위해, 우선 가능한
+원인을 분석해 보겠습니다. 기본적으로 이 오류는
+여러 상황에서 발생할 수 있는데, 가장 흔한
+경우는 설정 값이 잘못 지정된 경우입니다...
+
+<span class=”muted”>↑ 실제 정보에 도달하기 전에 이미 지쳐있다</span></pre>
     </section>
 
-    <section class="slide" data-title="Frontmatter">
+    <!-- 03. Solution -->
+    <section class=”slide” data-title=”Solution”>
       <div>
-        <p class="kicker">02. Frontmatter</p>
-        <h2>`name`과 `description`이 입구다</h2>
-        <p class="lead">스킬은 이름보다 설명이 중요하다. 설명에 트리거 상황이 구체적으로 있어야 에이전트가 정확히 고른다.</p>
+        <p class=”kicker”>02. Caveman</p>
+        <h2>기술 정보는 그대로, 군더더기만 삭제</h2>
+        <p class=”lead”>Claude Code에서 바로 쓸 수 있는 스킬. 한 마디로 켜고, 꺼질 때까지 계속 유지된다.</p>
       </div>
-      <div class="stack">
-        <div class="callout">
-          <span class="bar"></span>
+      <div class=”grid-3”>
+        <div class=”card”>
+          <span class=”mark green”>↓</span>
+          <b>~75% 토큰 절감</b>
+          <span>군더더기·관사·인사말 제거</span>
+        </div>
+        <div class=”card”>
+          <span class=”mark blue”>✓</span>
+          <b>기술 정확도 유지</b>
+          <span>코드·에러·용어는 손대지 않음</span>
+        </div>
+        <div class=”card”>
+          <span class=”mark green”>⚡</span>
+          <b>켜고 끄기 간단</b>
+          <span>말 한마디로 on/off</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Trigger -->
+    <section class=”slide” data-title=”Trigger”>
+      <div>
+        <p class=”kicker”>03. 켜는 방법</p>
+        <h2>말 한마디로 켠다</h2>
+        <p class=”lead”>아래 표현 중 하나를 채팅에 입력하면 즉시 활성화된다.</p>
+      </div>
+      <div class=”stack”>
+        <div class=”callout”>
+          <span class=”bar”></span>
           <div>
-            <b>`name: caveman`</b>
-            <span>사람이 부르는 짧은 이름. 링크나 목록에서 식별하는 역할.</span>
+            <b>켜기</b>
+            <span>”caveman mode” &nbsp;·&nbsp; “talk like caveman” &nbsp;·&nbsp; “use caveman” &nbsp;·&nbsp; “less tokens” &nbsp;·&nbsp; “be brief” &nbsp;·&nbsp; <strong>/caveman</strong></span>
           </div>
         </div>
-        <div class="callout">
-          <span class="bar"></span>
+        <div class=”callout”>
+          <span class=”bar” style=”background:var(--red)”></span>
           <div>
-            <b>`description`</b>
-            <span>언제 써야 하는지 설명. `less tokens`, `be brief`, `/caveman`처럼 실제 사용자 표현을 넣는다.</span>
+            <b>끄기</b>
+            <span>”stop caveman” &nbsp;·&nbsp; “normal mode” &nbsp;·&nbsp; “자세히 설명해줘”</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Core Instruction">
+    <!-- 05. Before/After -->
+    <section class=”slide full” data-title=”Before After”>
       <div>
-        <p class="kicker">03. Body</p>
-        <h2>첫 문장은 스킬의 헌법이다</h2>
-        <p class="lead">메타데이터 다음에는 실제 행동 지시가 온다. Caveman은 목표를 한 줄로 강하게 고정한다.</p>
-      </div>
-      <div class="stack">
-        <pre class="codebox">Respond terse like smart caveman.
-All technical substance stay.
-Only fluff die.</pre>
-        <div class="panel">
-          <h3>해설</h3>
-          <p>짧게 말하되 기술 내용은 빼지 말라는 균형이 들어 있다. 이 한 줄이 없으면 단순히 불친절한 답변이 될 수 있다.</p>
+        <p class=”kicker”>04. 실제 비교</p>
+        <h2>”왜 React 컴포넌트가 리렌더링 돼?”</h2>
+        <div class=”grid-2” style=”margin-top:20px”>
+          <pre class=”codebox”><span class=”warn”>일반 모드</span>
+
+안녕하세요! React 컴포넌트가 불필요하게
+리렌더링되는 문제는 상당히 자주 발생하는
+현상입니다. 기본적으로 React는 상태나 props가
+변경될 때 컴포넌트를 리렌더링하는데, 객체를
+inline으로 생성하면 매 렌더마다 새로운 참조가
+생성되기 때문에 변경으로 인식합니다.
+이를 해결하는 방법으로는 useMemo 훅을
+사용하시는 것을 권장드립니다.</pre>
+          <pre class=”codebox”><span class=”muted”>Caveman 모드</span>
+
+Inline obj prop → new ref → re-render.
+`useMemo`.</pre>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Persistence">
+    <!-- 06. What's Preserved -->
+    <section class=”slide” data-title=”Preserved”>
       <div>
-        <p class="kicker">04. Persistence</p>
-        <h2>켜진 뒤 언제까지 유지할지 정한다</h2>
-        <p class="lead">스킬이 한 번만 적용되는지, 계속 유지되는지 명시해야 대화 중간에 흐트러지지 않는다.</p>
+        <p class=”kicker”>05. 유지되는 것</p>
+        <h2>기술 정보는 손대지 않는다</h2>
+        <p class=”lead”>압축 모드라도 실무에서 중요한 정보는 절대 줄이지 않는다.</p>
       </div>
-      <pre class="codebox">## Persistence
-
-ACTIVE EVERY RESPONSE once triggered.
-No revert after many turns.
-No filler drift.
-Still active if unsure.
-Off only when user says "stop caveman" or "normal mode".</pre>
-    </section>
-
-    <section class="slide full" data-title="Persistence Meaning">
-      <div>
-        <p class="kicker">05. Persistence 해설</p>
-        <h2>좋은 스킬은 상태 전환을 명확히 한다</h2>
-        <div class="grid-4">
-          <div class="card">
-            <span class="mark green">1</span>
-            <b>언제 켜짐</b>
-            <span>사용자가 caveman 관련 표현을 말했을 때.</span>
+      <div class=”stack”>
+        <div class=”grid-2” style=”margin-top:0”>
+          <div class=”card”>
+            <span class=”mark green”>✓</span>
+            <b>유지</b>
+            <span>기술 용어 · 코드 블록 · 에러 메시지 · 파일 경로 · 정확한 수치</span>
           </div>
-          <div class="card">
-            <span class="mark blue">2</span>
-            <b>얼마나 유지</b>
-            <span>명시적으로 끄기 전까지 계속 적용.</span>
-          </div>
-          <div class="card">
-            <span class="mark yellow">3</span>
-            <b>흔들림 방지</b>
-            <span>여러 턴 뒤에도 장황한 말투로 돌아가지 않음.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">4</span>
-            <b>종료 조건</b>
-            <span>`stop caveman`, `normal mode`가 명확한 off 신호.</span>
+          <div class=”card”>
+            <span class=”mark red”>✗</span>
+            <b>삭제</b>
+            <span>관사(a/an/the) · 인사말 · 완충 표현 · 장황한 설명 · 불필요한 확인</span>
           </div>
         </div>
+        <pre class=”codebox”>패턴: <strong>[대상] [동작] [이유]. [다음 조치].</strong></pre>
       </div>
     </section>
 
-    <section class="slide" data-title="Rules Drop">
+    <!-- 07. Safety -->
+    <section class=”slide” data-title=”Safety”>
       <div>
-        <p class="kicker">06. Rules</p>
-        <h2>무엇을 줄일지 구체화한다</h2>
-        <p class="lead">“짧게 말해”보다 강한 이유는 삭제 대상이 구체적이기 때문이다.</p>
+        <p class=”kicker”>06. 안전 장치</p>
+        <h2>위험한 순간엔 자동으로 자세해진다</h2>
+        <p class=”lead”>보안 경고·되돌릴 수 없는 작업에서는 잠깐 일반 모드로 전환 후 다시 Caveman으로 돌아온다.</p>
       </div>
-      <pre class="codebox">## Rules
+      <pre class=”codebox”>사용자: “users 테이블 전부 지워줘”
 
-Drop: articles (a/an/the), filler (just/really/basically/actually/simply),
-pleasantries (sure/certainly/of course/happy to), hedging.
-Fragments OK.
-Short synonyms (big not extensive, fix not "implement a solution for").
-Abbreviate common terms (DB/auth/config/req/res/fn/impl).
-Strip conjunctions.
-Use arrows for causality (X -&gt; Y).
-One word when one word enough.</pre>
+<span class=”warn”>⚠ Warning:</span> This will permanently delete all rows
+in the `users` table and cannot be undone.
+
+```sql
+DROP TABLE users;
+```
+
+Caveman resume. Verify backup exist first.</pre>
     </section>
 
-    <section class="slide" data-title="Rules Keep">
+    <!-- 08. Persistence -->
+    <section class=”slide full” data-title=”Persistence”>
       <div>
-        <p class="kicker">07. Guardrails</p>
-        <h2>줄이면 안 되는 것도 정한다</h2>
-        <p class="lead">압축 스킬의 핵심은 정보 손실 방지다. Caveman은 정확히 남길 것을 별도로 지정한다.</p>
-      </div>
-      <pre class="codebox">Technical terms stay exact.
-Code blocks unchanged.
-Errors quoted exact.
-
-Pattern: `[thing] [action] [reason]. [next step].`</pre>
-    </section>
-
-    <section class="slide" data-title="Pattern">
-      <div>
-        <p class="kicker">08. Output Pattern</p>
-        <h2>형식이 있으면 짧아도 이해된다</h2>
-        <p class="lead">짧은 답변은 순서가 무너지면 위험하다. 그래서 패턴이 필요하다.</p>
-      </div>
-      <div class="grid-4">
-        <div class="card">
-          <span class="mark green">1</span>
-          <b>thing</b>
-          <span>무엇이 문제인지 먼저 말한다.</span>
-        </div>
-        <div class="card">
-          <span class="mark blue">2</span>
-          <b>action</b>
-          <span>무슨 일이 일어났는지 말한다.</span>
-        </div>
-        <div class="card">
-          <span class="mark yellow">3</span>
-          <b>reason</b>
-          <span>왜 그런지 짧게 붙인다.</span>
-        </div>
-        <div class="card">
-          <span class="mark red">4</span>
-          <b>next step</b>
-          <span>바로 할 일을 제시한다.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Not Yes">
-      <div>
-        <p class="kicker">09. Example Pair</p>
-        <h2>나쁜 답변과 좋은 답변을 같이 둔다</h2>
-        <p class="lead">스킬 문서에는 추상 규칙보다 before/after가 강하다. 에이전트가 원하는 톤을 바로 배운다.</p>
-      </div>
-      <pre class="codebox">Not:
-"Sure! I'd be happy to help you with that.
-The issue you're experiencing is likely caused by..."
-
-Yes:
-"Bug in auth middleware.
-Token expiry check use `&lt;` not `&lt;=`.
-Fix:"</pre>
-    </section>
-
-    <section class="slide" data-title="Examples">
-      <div>
-        <p class="kicker">10. Examples</p>
-        <h2>짧은 예시가 동작 범위를 만든다</h2>
-        <p class="lead">React와 DB 예시가 들어가 있어 코딩 대화에서도 이 스킬이 적용됨을 보여준다.</p>
-      </div>
-      <pre class="codebox">### Examples
-
-**"Why React component re-render?"**
-
-&gt; Inline obj prop -&gt; new ref -&gt; re-render. `useMemo`.
-
-**"Explain database connection pooling."**
-
-&gt; Pool = reuse DB conn. Skip handshake -&gt; fast under load.</pre>
-    </section>
-
-    <section class="slide" data-title="Exception">
-      <div>
-        <p class="kicker">11. Exception</p>
-        <h2>예외 규칙이 있어야 실무에서 안전하다</h2>
-        <p class="lead">항상 짧게만 말하면 위험하다. 되돌릴 수 없는 작업, 보안, 복잡한 절차는 압축을 잠깐 푼다.</p>
-      </div>
-      <pre class="codebox">## Auto-Clarity Exception
-
-Drop caveman temporarily for:
-security warnings,
-irreversible action confirmations,
-multi-step sequences where fragment order risks misread,
-user asks to clarify or repeats question.
-Resume caveman after clear part done.</pre>
-    </section>
-
-    <section class="slide" data-title="Exception Example">
-      <div>
-        <p class="kicker">12. Exception Example</p>
-        <h2>위험한 순간에는 자세히 경고한다</h2>
-        <p class="lead">Caveman 스킬 안에서도 삭제 같은 위험 작업은 명확한 경고를 우선한다.</p>
-      </div>
-      <pre class="codebox">Example -- destructive op:
-
-&gt; **Warning:** This will permanently delete all rows in the `users` table
-&gt; and cannot be undone.
-&gt;
-&gt; ```sql
-&gt; DROP TABLE users;
-&gt; ```
-&gt;
-&gt; Caveman resume. Verify backup exist first.</pre>
-    </section>
-
-    <section class="slide full" data-title="Markdown Anatomy">
-      <div>
-        <p class="kicker">13. Anatomy</p>
-        <h2>Caveman에서 뽑는 스킬 작성 형식</h2>
-        <div class="grid-4">
-          <div class="card">
-            <span class="mark green">A</span>
-            <b>Metadata</b>
-            <span>name, description, trigger phrases.</span>
+        <p class=”kicker”>07. 지속성</p>
+        <h2>한 번 켜면 계속 유지된다</h2>
+        <div class=”grid-4”>
+          <div class=”card”>
+            <span class=”mark green”>1</span>
+            <b>켜질 때</b>
+            <span>트리거 표현을 말하는 순간부터 즉시 적용</span>
           </div>
-          <div class="card">
-            <span class="mark blue">B</span>
-            <b>Core Rule</b>
-            <span>스킬이 바꿀 행동을 한 문장으로 고정.</span>
+          <div class=”card”>
+            <span class=”mark blue”>2</span>
+            <b>유지 기간</b>
+            <span>명시적으로 끄기 전까지 모든 답변에 적용</span>
           </div>
-          <div class="card">
-            <span class="mark yellow">C</span>
-            <b>Operating Rules</b>
-            <span>해야 할 것, 버릴 것, 유지할 것.</span>
+          <div class=”card”>
+            <span class=”mark yellow”>3</span>
+            <b>흔들림 없음</b>
+            <span>여러 턴이 지나도 장황한 말투로 돌아가지 않음</span>
           </div>
-          <div class="card">
-            <span class="mark red">D</span>
-            <b>Examples</b>
-            <span>나쁜 출력과 좋은 출력, 예외 상황.</span>
+          <div class=”card”>
+            <span class=”mark red”>4</span>
+            <b>끄기</b>
+            <span>”stop caveman” 또는 “normal mode”로 즉시 종료</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Reusable Template">
+    <!-- 09. Setup -->
+    <section class=”slide” data-title=”Setup”>
       <div>
-        <p class="kicker">14. Template</p>
-        <h2>다른 스킬도 이 뼈대로 시작한다</h2>
-        <p class="lead">Caveman 형식은 작고 선명한 스킬을 만들 때 재사용하기 좋다.</p>
+        <p class=”kicker”>08. 설치</p>
+        <h2>Claude Code에서 바로 시작하기</h2>
+        <p class=”lead”>Claude Code의 Skills 기능을 통해 설치한다. SKILL.md 파일 하나로 동작한다.</p>
       </div>
-      <pre class="codebox">---
-name: short-skill-name
-description: &gt;
-  What this skill does.
-  Use when user says X, asks for Y, or needs Z.
----
+      <div class=”stack”>
+        <pre class=”codebox”># 방법 1 — 명령어로 설치
+/install caveman
 
-Core behavior in 1-3 direct sentences.
-
-## Persistence
-When active, when inactive, how to stop.
-
-## Rules
-Do this. Avoid that. Preserve these exact details.
-
-## Examples
-Not: ...
-Yes: ...
-
-## Exceptions
-When to pause or override the skill.</pre>
+# 방법 2 — 직접 파일 추가
+# github.com/JuliusBrussee/caveman 에서 내려받아
+# .claude/skills/caveman.md 로 저장</pre>
+        <div class=”callout”>
+          <span class=”bar”></span>
+          <div>
+            <b>공식 문서</b>
+            <span>code.claude.com/docs/en/skills — Skills 설치·관리 전체 가이드</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="slide" data-title="Korean Code Version">
+    <!-- 10. Team Use Cases -->
+    <section class=”slide full” data-title=”Team Use Cases”>
       <div>
-        <p class="kicker">15. Korean Version</p>
-        <h2>한글로 옮기면 이런 코드가 된다</h2>
-        <p class="lead">실제 배포는 영어 원문이 더 범용적이지만, 교육용으로는 같은 구조를 한국어로 보면 더 빨리 이해된다.</p>
+        <p class=”kicker”>09. 팀 활용</p>
+        <h2>이런 상황에 특히 유용하다</h2>
+        <div class=”grid-4”>
+          <div class=”card”>
+            <span class=”mark green”>①</span>
+            <b>빠른 디버깅</b>
+            <span>에러 원인과 해결 방법을 2~3줄로 받기</span>
+          </div>
+          <div class=”card”>
+            <span class=”mark blue”>②</span>
+            <b>코드 리뷰</b>
+            <span>지적 사항을 핵심만 bullet로 받기</span>
+          </div>
+          <div class=”card”>
+            <span class=”mark yellow”>③</span>
+            <b>반복 질의응답</b>
+            <span>짧은 질문이 많을 때 컨텍스트 절약</span>
+          </div>
+          <div class=”card”>
+            <span class=”mark red”>④</span>
+            <b>모바일·좁은 화면</b>
+            <span>화면이 좁을 때 읽기 편한 짧은 답변</span>
+          </div>
+        </div>
       </div>
-      <pre class="codebox dense">---
-name: caveman-ko
-description: &gt;
-  초압축 커뮤니케이션 모드.
-  군더더기, 관사, 예의 문구를 줄여 토큰 사용량을 낮춘다.
-  기술적 정확도는 그대로 유지한다.
-  사용자가 "caveman mode", "짧게", "토큰 줄여",
-  "간단히", "$caveman"처럼 말할 때 사용한다.
----
-
-똑똑한 원시인처럼 짧게 답한다. 기술 내용은 유지하고 군더더기만 제거한다.
-
-## 상태 유지
-
-한 번 켜지면 모든 답변에 적용한다. 여러 턴이 지나도 유지한다.
-사용자가 "stop caveman", "normal mode", "자세히 설명해줘"라고 말할 때만 끈다.
-
-## 규칙
-
-버린다: 관사, filler, 예의 문구, 불필요한 완충 표현.
-허용한다: 문장 조각, 짧은 동의어, DB/auth/config 같은 약어.
-활용한다: X -&gt; Y 형태의 인과 표현.
-
-유지한다: 기술 용어, 코드 블록, 에러 메시지, 파일 경로.
-패턴: `[대상] [동작] [이유]. [다음 조치].`
-
-Not: "물론입니다. 이 문제를 해결하기 위해 먼저 가능한 원인을 살펴보면..."
-
-Yes: "Auth middleware bug. Expiry check use `&lt;` not `&lt;=`. Fix condition."
-
-## 예외
-
-보안 경고, 되돌릴 수 없는 작업 확인, 순서가 중요한 다단계 절차에서는 잠깐 자세히 쓴다.
-명확히 설명한 뒤 다시 caveman으로 돌아간다.</pre>
     </section>
 
-    <section class="slide full" data-title="Resources">
+    <!-- 11. Resources -->
+    <section class=”slide full” data-title=”Resources”>
       <div>
-        <p class="kicker">18. Resources</p>
-        <h2>참고 자료</h2>
-        <div class="grid-3">
-          <div class="card">
-            <span class="mark green">1</span>
+        <p class=”kicker”>10. 참고 자료</p>
+        <h2>더 알아보기</h2>
+        <div class=”grid-3” style=”margin-top:28px”>
+          <div class=”card”>
+            <span class=”mark green”>1</span>
             <b>원본 SKILL.md</b>
-            <span><a href="https://github.com/JuliusBrussee/caveman" style="color:var(--green)">github.com/JuliusBrussee/caveman</a></span>
+            <span><a href=”https://github.com/JuliusBrussee/caveman” style=”color:var(--green)”>github.com/JuliusBrussee/caveman</a></span>
           </div>
-          <div class="card">
-            <span class="mark blue">2</span>
+          <div class=”card”>
+            <span class=”mark blue”>2</span>
             <b>Claude Code Skills 공식 문서</b>
-            <span><a href="https://code.claude.com/docs/en/skills" style="color:var(--blue)">code.claude.com/docs/en/skills</a></span>
+            <span><a href=”https://code.claude.com/docs/en/skills” style=”color:var(--blue)”>code.claude.com/docs/en/skills</a></span>
           </div>
-          <div class="card">
-            <span class="mark yellow">3</span>
+          <div class=”card”>
+            <span class=”mark yellow”>3</span>
             <b>Caveman 소개 글</b>
-            <span><a href="https://www.implicator.ai/caveman-claude-code-skill-cuts-output-20-your-bill-barely-notices-2/" style="color:var(--yellow)">implicator.ai — Caveman 블로그</a></span>
+            <span><a href=”https://www.implicator.ai/caveman-claude-code-skill-cuts-output-20-your-bill-barely-notices-2/” style=”color:var(--yellow)”>implicator.ai — Caveman 블로그</a></span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-title="Takeaway">
+    <!-- 12. Takeaway -->
+    <section class=”slide” data-title=”Takeaway”>
       <div>
-        <p class="kicker">16. Takeaway</p>
-        <h2>좋은 스킬 markdown은 작동 설명서다</h2>
-        <p class="lead">Caveman의 강점은 짧은 말투가 아니라, 트리거·상태 유지·규칙·예시·예외가 한 파일 안에 선명하게 들어 있다는 점이다.</p>
+        <p class=”kicker”>11. 정리</p>
+        <h2>오늘 바로 시작하기</h2>
+        <p class=”lead”>설치하고, “caveman mode”라고 말하고, 차이를 확인한다.</p>
       </div>
-      <div class="panel">
-        <h3>한 문장 요약</h3>
-        <p>스킬은 “프롬프트 모음”이 아니라, 에이전트가 특정 상황에서 반복적으로 같은 품질의 행동을 하도록 만드는 markdown 규격이다.</p>
+      <div class=”panel”>
+        <h3>핵심 요약</h3>
+        <div class=”list”>
+          <span>Caveman은 군더더기를 줄이고 기술 정보를 유지하는 Claude Code 스킬이다.</span>
+          <span>트리거 한 번으로 켜고, 명시적으로 말해야 꺼진다.</span>
+          <span>보안·위험 상황에서는 자동으로 자세한 모드로 전환된다.</span>
+          <span>github.com/JuliusBrussee/caveman 에서 바로 받을 수 있다.</span>
+        </div>
       </div>
     </section>
+
   </main>
 
   <nav class="nav" aria-label="슬라이드 이동">
