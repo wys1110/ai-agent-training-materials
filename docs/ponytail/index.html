@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ponytail Skill Markdown 해설</title>
+  <meta name="description" content="코드 최적화 스킬 Ponytail SKILL.md를 기준으로 에이전트 스킬 형식을 설명하는 자료">
+  <style>
+    :root {
+      --ink: #202226;
+      --muted: #626a76;
+      --paper: #f6f2ea;
+      --surface: #fffdf8;
+      --line: #ddd4c8;
+      --green: #2f7656;
+      --red: #c24d42;
+      --blue: #336f9e;
+      --yellow: #c68b2d;
+      --code: #20241f;
+      --shadow: 0 20px 58px rgba(32, 34, 38, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    body {
+      min-width: 320px;
+      display: grid;
+      place-items: center;
+    }
+
+    .deck {
+      width: min(100vw, 177.7778vh);
+      height: min(100vh, 56.25vw);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(47, 118, 86, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(47, 118, 86, 0.07) 1px, transparent 1px),
+        var(--paper);
+      background-size: 44px 44px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      gap: clamp(24px, 4vw, 58px);
+      align-items: center;
+      padding: clamp(34px, 5vw, 70px);
+      opacity: 0;
+      transform: translateX(34px);
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .slide > * {
+      min-width: 0;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide.full {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: clamp(12px, 1.08vw, 16px);
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.04;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(44px, 7vw, 104px);
+    }
+
+    h2 {
+      max-width: 14ch;
+      font-size: clamp(34px, 5vw, 76px);
+    }
+
+    h3 {
+      color: var(--ink);
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.18;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(14px, 1.42vw, 21px);
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .lead {
+      max-width: 800px;
+      margin-top: 24px;
+      color: #333842;
+      font-size: clamp(18px, 2.02vw, 30px);
+      line-height: 1.42;
+    }
+
+    .panel,
+    .card,
+    .note {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 36px rgba(32, 34, 38, 0.08);
+    }
+
+    .panel {
+      padding: clamp(22px, 3vw, 34px);
+      box-shadow: var(--shadow);
+    }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      min-height: 165px;
+      display: grid;
+      align-content: space-between;
+      gap: 14px;
+      padding: clamp(16px, 1.8vw, 24px);
+    }
+
+    .card b {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(18px, 1.65vw, 25px);
+      line-height: 1.16;
+    }
+
+    .card span {
+      color: var(--muted);
+      font-size: clamp(13px, 1.12vw, 17px);
+      line-height: 1.42;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .green {
+      background: var(--green);
+    }
+
+    .blue {
+      background: var(--blue);
+    }
+
+    .red {
+      background: var(--red);
+    }
+
+    .yellow {
+      background: var(--yellow);
+    }
+
+    .list {
+      display: grid;
+      gap: 11px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.25vw, 19px);
+      line-height: 1.38;
+    }
+
+    .list span::before {
+      content: "• ";
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .codebox {
+      min-width: 0;
+      max-height: 100%;
+      overflow: auto;
+      padding: clamp(16px, 2vw, 26px);
+      border-radius: 8px;
+      background: var(--code);
+      color: #fff8ed;
+      box-shadow: var(--shadow);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(11px, 1.03vw, 15px);
+      line-height: 1.52;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .codebox.dense {
+      font-size: clamp(8.5px, 0.82vw, 12px);
+      line-height: 1.38;
+    }
+
+    .codebox strong {
+      color: #8bd3a7;
+      font-weight: 850;
+    }
+
+    .codebox .muted {
+      color: #b9c2b9;
+    }
+
+    .codebox .warn {
+      color: #f2c477;
+    }
+
+    .callout {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 14px;
+      align-items: stretch;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .bar {
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .callout b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: clamp(17px, 1.45vw, 22px);
+    }
+
+    .callout span {
+      color: var(--muted);
+      font-size: clamp(13px, 1.12vw, 17px);
+      line-height: 1.42;
+    }
+
+    .nav {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      background: rgba(255, 253, 248, 0.86);
+      border: 1px solid rgba(221, 212, 200, 0.94);
+      border-radius: 999px;
+      box-shadow: 0 14px 42px rgba(32, 34, 38, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 23px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(47, 118, 86, 0.28);
+      outline-offset: 2px;
+    }
+
+    .count {
+      min-width: 76px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 11;
+      width: 100%;
+      height: 5px;
+      background: rgba(32, 34, 38, 0.12);
+    }
+
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width 180ms ease;
+    }
+
+    @media (max-width: 940px) {
+      .slide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: clamp(14px, 4vw, 28px);
+      }
+
+      .slide.full {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(28px, 8vw, 42px);
+      }
+
+      h2 {
+        font-size: clamp(22px, 6.2vw, 36px);
+      }
+
+      h3 {
+        font-size: 15px;
+      }
+
+      .lead {
+        margin-top: 12px;
+        font-size: clamp(12px, 3.8vw, 17px);
+      }
+
+      p,
+      .card span,
+      .callout span,
+      .list {
+        font-size: 10px;
+      }
+
+      .card,
+      .panel,
+      .callout {
+        padding: 10px;
+      }
+
+      .codebox {
+        padding: 10px;
+        font-size: 8.5px;
+      }
+
+      .codebox.dense {
+        font-size: 7.5px;
+        line-height: 1.32;
+      }
+
+      .mark {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+      }
+
+      .nav {
+        right: 12px;
+        bottom: 10px;
+      }
+
+      button {
+        width: 32px;
+        height: 32px;
+      }
+
+      .count {
+        min-width: 60px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        display: block;
+      }
+
+      .deck {
+        width: 100vw;
+        height: 100vh;
+        aspect-ratio: auto;
+      }
+
+      .slide,
+      .slide.full {
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 16px;
+        padding: 28px 20px 96px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(40px, 15vw, 58px);
+      }
+
+      h2 {
+        max-width: 100%;
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p,
+      .lead {
+        font-size: 18px;
+      }
+
+      .kicker {
+        font-size: 13px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+        margin-top: 16px;
+      }
+
+      .card,
+      .panel,
+      .callout {
+        min-height: auto;
+        padding: 16px;
+      }
+
+      .card b,
+      .callout b {
+        font-size: 18px;
+      }
+
+      .card span,
+      .callout span,
+      .list {
+        font-size: 15px;
+      }
+
+      .codebox {
+        font-size: 12px;
+        max-height: none;
+      }
+
+      .codebox.dense {
+        max-height: min(58vh, 520px);
+        overflow: auto;
+        font-size: 10px;
+        line-height: 1.34;
+      }
+
+      .nav {
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Ponytail Skill Markdown 해설">
+
+    <section class="slide active" data-title="Cover">
+      <div>
+        <p class="kicker">Skill Markdown Explainer</p>
+        <h1>Ponytail SKILL.md</h1>
+        <p class="lead">느슨하고 비효율적인 코드를 단단한 묶음으로 당기는 최적화 스킬의 구조를 이해한다.</p>
+      </div>
+      <div class="panel">
+        <h3>이번 자료의 방향</h3>
+        <div class="list">
+          <span>추상 설명보다 실제 markdown 원문을 먼저 본다.</span>
+          <span>최적화 스킬이 왜 우선순위와 guardrail이 중요한지 이해한다.</span>
+          <span>다른 최적화 스킬에도 재사용할 형식을 뽑아낸다.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Original 1">
+      <div>
+        <p class="kicker">01. 실제 Markdown</p>
+        <h2>스킬은 Markdown 파일 하나로 시작한다</h2>
+        <p class="lead">처음 `---` 블록은 메타데이터다. 에이전트가 이 스킬을 언제 불러야 하는지 판단하는 힌트가 된다.</p>
+      </div>
+      <pre class="codebox">---
+name: ponytail
+description: &gt;
+  Code optimization mode. Scans for performance
+  bottlenecks, redundant operations, and inefficient
+  patterns, then applies targeted fixes while preserving
+  exact behavior and public interfaces.
+  Use when user says "optimize", "make it faster",
+  "ponytail", "코드 최적화", "성능 개선",
+  or invokes /ponytail.
+---</pre>
+    </section>
+
+    <section class="slide" data-title="Frontmatter">
+      <div>
+        <p class="kicker">02. Frontmatter</p>
+        <h2>`name`과 `description`이 입구다</h2>
+        <p class="lead">description에 트리거 상황이 구체적으로 있어야 에이전트가 정확히 고른다. 영어와 한국어 트리거를 모두 넣으면 다국어 대화에서도 발동한다.</p>
+      </div>
+      <div class="stack">
+        <div class="callout">
+          <span class="bar"></span>
+          <div>
+            <b>`name: ponytail`</b>
+            <span>사람이 부르는 짧은 이름. 링크나 목록에서 식별하는 역할.</span>
+          </div>
+        </div>
+        <div class="callout">
+          <span class="bar"></span>
+          <div>
+            <b>`description`</b>
+            <span>"make it faster", "코드 최적화", "성능 개선"처럼 실제 사용자 표현을 포함시킨다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Core Instruction">
+      <div>
+        <p class="kicker">03. Body</p>
+        <h2>첫 세 문장이 스킬의 기준선이다</h2>
+        <p class="lead">메타데이터 다음의 세 문장이 스킬 전체의 중심을 잡는다. 목표·전략·금지선이 각 한 줄.</p>
+      </div>
+      <div class="stack">
+        <pre class="codebox">Pull scattered, slow code into a tight, efficient bundle.
+Identify the highest-impact bottleneck first.
+Fix, measure, repeat.
+Never change observable behavior.</pre>
+        <div class="panel">
+          <h3>해설</h3>
+          <p>최적화 방향(묶기), 전략(가장 큰 병목 먼저), 불변 조건(동작 변경 금지)을 각 한 줄로 고정한다. 이 세 줄이 없으면 모든 코드를 무차별 변경할 위험이 있다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Persistence">
+      <div>
+        <p class="kicker">04. Persistence</p>
+        <h2>이 스킬은 작업 단위로 적용된다</h2>
+        <p class="lead">Caveman처럼 대화 전체가 아니라, 현재 작업 단위로 범위를 좁혔다. 그래야 최적화가 남발되지 않는다.</p>
+      </div>
+      <pre class="codebox">## Persistence
+
+ACTIVE FOR THE CURRENT TASK once triggered.
+Apply to every code block shown unless
+  user says "skip this one".
+Off when user says "done" or "stop ponytail".</pre>
+    </section>
+
+    <section class="slide full" data-title="Persistence Meaning">
+      <div>
+        <p class="kicker">05. Persistence 해설</p>
+        <h2>좋은 스킬은 상태 전환을 명확히 한다</h2>
+        <div class="grid-4">
+          <div class="card">
+            <span class="mark green">1</span>
+            <b>언제 켜짐</b>
+            <span>사용자가 최적화 관련 표현을 말했을 때.</span>
+          </div>
+          <div class="card">
+            <span class="mark blue">2</span>
+            <b>적용 범위</b>
+            <span>현재 작업에서 보이는 모든 코드 블록에 적용.</span>
+          </div>
+          <div class="card">
+            <span class="mark yellow">3</span>
+            <b>건너뛰기</b>
+            <span>"skip this one"으로 특정 블록 제외 가능.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">4</span>
+            <b>종료 조건</b>
+            <span>"done" 또는 "stop ponytail"이 명확한 off 신호.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Rules Targets">
+      <div>
+        <p class="kicker">06. Rules</p>
+        <h2>무엇을 최적화할지 우선순위로 정한다</h2>
+        <p class="lead">"빠르게 만들어"보다 강한 이유는 대상이 우선순위별로 구체화되어 있기 때문이다.</p>
+      </div>
+      <pre class="codebox">## Rules
+
+Targets (in priority order):
+- O(n²)+ loops → reduce complexity
+- Repeated expensive calls inside loops
+    → hoist or cache
+- Unnecessary allocations
+    → reuse or preallocate
+- N+1 DB queries → batch or join
+- Redundant recomputation → memoize
+- Dead code paths → remove</pre>
+    </section>
+
+    <section class="slide" data-title="Rules Keep">
+      <div>
+        <p class="kicker">07. Guardrails</p>
+        <h2>바꾸면 안 되는 것도 정한다</h2>
+        <p class="lead">최적화 스킬의 핵심은 속도가 아니라 안전성이다. 동작을 바꾸지 않고 빠르게만 만들어야 한다.</p>
+      </div>
+      <pre class="codebox">Keep: all observable behavior,
+      public API signatures, error handling.
+
+Show: before snippet, after snippet,
+      one-line reason per change.
+
+Order changes by impact (biggest win first).
+No refactors beyond the optimization boundary.</pre>
+    </section>
+
+    <section class="slide full" data-title="Output Pattern">
+      <div>
+        <p class="kicker">08. Output Pattern</p>
+        <h2>형식이 있으면 변경 사유가 명확해진다</h2>
+        <div class="grid-4">
+          <div class="card">
+            <span class="mark green">1</span>
+            <b>Location</b>
+            <span>어디를 바꿨는지 먼저 말한다. 함수명이나 파일:라인.</span>
+          </div>
+          <div class="card">
+            <span class="mark blue">2</span>
+            <b>Problem</b>
+            <span>어떤 비효율이 있었는지 말한다. N+1, O(n²) 등.</span>
+          </div>
+          <div class="card">
+            <span class="mark yellow">3</span>
+            <b>Fix</b>
+            <span>어떻게 고쳤는지 말한다. JOIN, 캐시, 메모이제이션 등.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">4</span>
+            <b>Reason</b>
+            <span>왜 더 빠른지 한 줄로 붙인다. n회 왕복 → 1회 등.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Not Yes">
+      <div>
+        <p class="kicker">09. Example Pair</p>
+        <h2>나쁜 답변과 좋은 답변을 같이 둔다</h2>
+        <p class="lead">최적화 스킬은 설명보다 결과가 먼저다. 위치·문제·수정을 한 줄로 먼저 제시한다.</p>
+      </div>
+      <pre class="codebox">Not:
+"This code could be improved in several ways.
+First, you might want to consider that the loop
+structure here is potentially suboptimal..."
+
+Yes:
+"getUsersByTeam — N+1 query → single JOIN query
+(eliminates n DB round trips)"</pre>
+    </section>
+
+    <section class="slide" data-title="Examples">
+      <div>
+        <p class="kicker">10. Examples</p>
+        <h2>고빈도 패턴을 예시로 넣는다</h2>
+        <p class="lead">N+1 쿼리는 실무에서 가장 자주 만나는 병목이다. before/after가 같이 있어야 에이전트가 패턴을 배운다.</p>
+      </div>
+      <pre class="codebox">**"N+1 DB query in getUsersByTeam"**
+
+Before:
+for (const team of teams) {
+  users.push(
+    await db.query(
+      'SELECT * FROM users WHERE team_id = ?',
+      team.id
+    )
+  );
+}
+
+After:
+const users = await db.query(
+  'SELECT * FROM users WHERE team_id IN (?)',
+  teams.map(t =&gt; t.id)
+);</pre>
+    </section>
+
+    <section class="slide" data-title="Exception">
+      <div>
+        <p class="kicker">11. Exception</p>
+        <h2>예외 규칙이 있어야 실무에서 안전하다</h2>
+        <p class="lead">데이터 없이 최적화하면 잘못된 곳을 손댄다. 동작을 바꾸는 수정은 최적화가 아니다.</p>
+      </div>
+      <pre class="codebox">## Exceptions
+
+Do NOT optimize when:
+- no profiling data shows this is actually slow
+    (premature optimization),
+- the fix changes observable output or error behavior,
+- the change requires a library upgrade
+    (flag only, do not apply),
+- the code is a test fixture or
+    intentionally readable demo.
+
+Flag these and explain why,
+then resume on the next target.</pre>
+    </section>
+
+    <section class="slide" data-title="Exception Example">
+      <div>
+        <p class="kicker">12. Exception Example</p>
+        <h2>데이터 없이 최적화하면 멈추고 경고한다</h2>
+        <p class="lead">성능 문제가 확인되지 않은 코드는 그대로 두는 것이 최적화다.</p>
+      </div>
+      <pre class="codebox">Example -- premature optimization:
+
+&gt; **Skip:** No profiling data confirms this loop
+&gt; is a bottleneck.
+&gt; Current avg. response time: &lt; 2 ms.
+&gt;
+&gt; Optimizing here risks readability loss
+&gt; with no measurable gain.
+&gt; Run a profiler first, then re-invoke /ponytail.
+&gt;
+&gt; Ponytail resume.
+&gt; Next target: getUsersByTeam N+1 query.</pre>
+    </section>
+
+    <section class="slide full" data-title="Markdown Anatomy">
+      <div>
+        <p class="kicker">13. Anatomy</p>
+        <h2>Ponytail에서 뽑는 스킬 작성 형식</h2>
+        <div class="grid-4">
+          <div class="card">
+            <span class="mark green">A</span>
+            <b>Metadata</b>
+            <span>name, description, trigger phrases (영어+한국어).</span>
+          </div>
+          <div class="card">
+            <span class="mark blue">B</span>
+            <b>Core Rule</b>
+            <span>목표·전략·금지선을 3줄로 고정.</span>
+          </div>
+          <div class="card">
+            <span class="mark yellow">C</span>
+            <b>Operating Rules</b>
+            <span>우선순위 목록, guardrail, 출력 형식.</span>
+          </div>
+          <div class="card">
+            <span class="mark red">D</span>
+            <b>Examples</b>
+            <span>before/after 코드 쌍, 예외 상황과 경고 문구.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Reusable Template">
+      <div>
+        <p class="kicker">14. Template</p>
+        <h2>다른 스킬도 이 뼈대로 시작한다</h2>
+        <p class="lead">Ponytail 형식은 특정 분야 최적화 스킬을 만들 때 재사용하기 좋다.</p>
+      </div>
+      <pre class="codebox">---
+name: short-skill-name
+description: &gt;
+  What this skill does.
+  Use when user says X, asks for Y, or needs Z.
+---
+
+Core behavior: goal, strategy, constraint.
+
+## Persistence
+When active, scope, how to skip, how to stop.
+
+## Rules
+Targets in priority order.
+What to keep unchanged. Output format.
+
+## Examples
+Not: ...  Yes: ...
+
+## Exceptions
+When to pause, flag, or skip entirely.</pre>
+    </section>
+
+    <section class="slide" data-title="Korean Code Version">
+      <div>
+        <p class="kicker">15. Korean Version</p>
+        <h2>한글로 옮기면 이런 코드가 된다</h2>
+        <p class="lead">실제 배포는 영어 원문이 더 범용적이지만, 교육용으로는 같은 구조를 한국어로 보면 더 빨리 이해된다.</p>
+      </div>
+      <pre class="codebox dense">---
+name: ponytail-ko
+description: &gt;
+  코드 최적화 모드. 성능 병목, 중복 연산, 비효율 패턴을 찾아 수정한다.
+  동작과 공개 API는 그대로 유지한다.
+  사용자가 "최적화", "빠르게", "ponytail", "코드 정리",
+  "성능 개선", "/ponytail"처럼 말할 때 사용한다.
+---
+
+느슨한 코드를 단단한 묶음으로 당긴다.
+가장 큰 병목부터 찾는다. 고치고, 확인하고, 반복한다.
+동작은 절대 바꾸지 않는다.
+
+## 상태 유지
+
+현재 작업에만 적용한다.
+"이건 건너뛰어"라고 하면 해당 블록은 제외한다.
+"완료" 또는 "ponytail 그만"이라고 하면 끈다.
+
+## 규칙
+
+대상 (우선순위 순):
+- O(n²)+ 루프 → 복잡도 낮추기
+- 루프 안 반복 호출 → 호이스트 또는 캐시
+- 불필요한 할당 → 재사용 또는 사전 할당
+- N+1 DB 쿼리 → 배치 또는 JOIN
+- 중복 연산 → 메모이제이션
+- 사용하지 않는 코드 경로 → 제거
+
+유지: 동작, 공개 API, 에러 처리.
+표시: 변경 전, 변경 후, 이유 한 줄.
+
+## 예외
+
+최적화하지 않는 경우:
+- 프로파일링 데이터 없이 느리다고 판단된 코드
+- 수정이 동작을 바꾸는 경우
+- 라이브러리 업그레이드가 필요한 경우 (표시만, 적용 안 함)
+- 테스트 픽스처 또는 의도적으로 가독성 우선인 코드</pre>
+    </section>
+
+    <section class="slide" data-title="Takeaway">
+      <div>
+        <p class="kicker">16. Takeaway</p>
+        <h2>좋은 최적화 스킬은 안전망이 있다</h2>
+        <p class="lead">Ponytail의 강점은 빠르게 만드는 것이 아니라, 우선순위·guardrail·예외가 명확해서 잘못된 최적화를 막는다는 점이다.</p>
+      </div>
+      <div class="panel">
+        <h3>한 문장 요약</h3>
+        <p>최적화 스킬은 "빠르게 해줘"가 아니라, 무엇을 먼저·어디까지·언제 멈출지를 규정한 markdown 규격이다.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav" aria-label="슬라이드 이동">
+    <button type="button" id="prev" title="이전 슬라이드" aria-label="이전 슬라이드">‹</button>
+    <span class="count" id="count">1 / 16</span>
+    <button type="button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드">›</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const count = document.querySelector("#count");
+    const progress = document.querySelector("#progress");
+    const prev = document.querySelector("#prev");
+    const next = document.querySelector("#next");
+    let index = 0;
+
+    function update(target) {
+      index = Math.max(0, Math.min(slides.length - 1, target));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === index);
+      });
+      count.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      const hash = `slide-${index + 1}`;
+      if (location.hash !== `#${hash}`) {
+        history.replaceState(null, "", `#${hash}`);
+      }
+    }
+
+    prev.addEventListener("click", () => update(index - 1));
+    next.addEventListener("click", () => update(index + 1));
+    window.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        update(index + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        update(index - 1);
+      }
+      if (event.key === "Home") update(0);
+      if (event.key === "End") update(slides.length - 1);
+    });
+
+    const hashMatch = location.hash.match(/slide-(\d+)/);
+    update(hashMatch ? Number(hashMatch[1]) - 1 : 0);
+  </script>
+</body>
+</html>
