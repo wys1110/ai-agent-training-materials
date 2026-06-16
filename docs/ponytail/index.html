@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ponytail — 왜 쓰고 뭐가 좋은가</title>
-  <meta name="description" content="Ponytail 스킬이 필요한 이유와 실제 효과를 설명하는 자료">
+  <meta name="description" content="Ponytail 스킬이 필요한 이유와 실제 효과">
   <style>
     :root {
       --ink: #202226;
@@ -49,175 +49,115 @@
       background-size: 44px 44px;
     }
 
-    /* ── 챕터 탭 ── */
-    .chtabs {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      display: flex;
-      gap: 4px;
-      padding: 4px;
-      background: rgba(246, 242, 234, 0.9);
-      border: 1px solid rgba(221, 212, 200, 0.8);
-      border-radius: 999px;
-      box-shadow: 0 2px 12px rgba(32, 34, 38, 0.08);
-      backdrop-filter: blur(8px);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .chtabs span {
-      padding: 4px 14px;
-      border-radius: 999px;
-      font-size: clamp(9px, 0.82vw, 12px);
-      font-weight: 850;
-      text-transform: uppercase;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      transition: background 160ms, color 160ms;
-    }
-
-    .chtabs span.on { color: #fff; background: var(--green); }
-
-    /* ── 슬라이드 ── */
     .slide {
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-      gap: clamp(24px, 4vw, 58px);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(20px, 3.5vw, 52px);
       align-items: center;
-      padding: clamp(48px, 6vw, 80px) clamp(34px, 5vw, 70px) clamp(34px, 5vw, 70px);
+      padding: clamp(44px, 5.5vw, 72px) clamp(32px, 4.8vw, 68px) clamp(32px, 4.8vw, 68px);
       opacity: 0;
-      transform: translateX(34px);
+      transform: translateX(28px);
       pointer-events: none;
       transition: opacity 220ms ease, transform 220ms ease;
     }
 
     .slide > * { min-width: 0; }
     .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
-    .slide.full { grid-template-columns: 1fr; align-items: stretch; }
 
-    /* ── 타이포 ── */
     .kicker {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       color: var(--green);
-      font-size: clamp(11px, 1vw, 15px);
+      font-size: clamp(10px, 0.95vw, 14px);
       font-weight: 850;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     h1, h2, h3 { margin: 0; line-height: 1.04; letter-spacing: 0; text-wrap: balance; }
-    h1 { max-width: 12ch; font-size: clamp(44px, 7vw, 104px); }
-    h2 { max-width: 16ch; font-size: clamp(30px, 4.6vw, 70px); }
-    h3 { color: var(--ink); font-size: clamp(20px, 2vw, 30px); line-height: 1.18; }
+    h1 { font-size: clamp(36px, 6vw, 88px); }
+    h2 { font-size: clamp(22px, 3.2vw, 50px); }
+    h3 { font-size: clamp(16px, 1.65vw, 24px); line-height: 1.2; color: var(--ink); }
 
-    p { margin: 0; color: var(--muted); font-size: clamp(14px, 1.42vw, 21px); line-height: 1.46; text-wrap: pretty; }
+    p { margin: 0; color: var(--muted); font-size: clamp(13px, 1.3vw, 19px); line-height: 1.48; text-wrap: pretty; }
 
-    .lead {
-      max-width: 800px;
-      margin-top: 20px;
-      color: #333842;
-      font-size: clamp(18px, 2.02vw, 30px);
-      line-height: 1.42;
-    }
+    .lead { margin-top: 16px; color: #2e3240; font-size: clamp(15px, 1.65vw, 24px); line-height: 1.42; }
 
-    /* ── 컴포넌트 ── */
-    .panel, .card, .note {
+    .panel {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: 0 12px 36px rgba(32, 34, 38, 0.08);
+      padding: clamp(18px, 2.2vw, 30px);
+      box-shadow: var(--shadow);
     }
 
-    .panel { padding: clamp(22px, 3vw, 34px); box-shadow: var(--shadow); }
-    .stack { display: grid; gap: 14px; }
-
-    .grid-2, .grid-3, .grid-4 { display: grid; gap: 14px; margin-top: 24px; }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .card {
-      min-height: 150px;
-      display: grid;
-      align-content: space-between;
-      gap: 12px;
-      padding: clamp(14px, 1.6vw, 22px);
-    }
-
-    .card b { display: block; color: var(--ink); font-size: clamp(16px, 1.55vw, 23px); line-height: 1.16; }
-    .card span { color: var(--muted); font-size: clamp(12px, 1.05vw, 16px); line-height: 1.42; }
-
-    .mark {
-      width: 38px; height: 38px;
-      display: grid; place-items: center;
-      border-radius: 999px;
-      background: var(--ink);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 850;
-    }
-
-    .green  { background: var(--green); }
-    .blue   { background: var(--blue); }
-    .red    { background: var(--red); }
-    .yellow { background: var(--yellow); }
+    .stack { display: grid; gap: 10px; }
 
     .list {
       display: grid;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 12px;
       color: var(--muted);
-      font-size: clamp(14px, 1.25vw, 19px);
+      font-size: clamp(12px, 1.15vw, 17px);
       line-height: 1.38;
     }
 
     .list span::before { content: "• "; color: var(--green); font-weight: 850; }
 
+    .callout {
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+
+    .bar { border-radius: 999px; background: var(--green); }
+    .bar-blue { background: var(--blue); }
+    .bar-red  { background: var(--red); }
+    .bar-yellow { background: var(--yellow); }
+
+    .callout b { display: block; margin-bottom: 3px; color: var(--ink); font-size: clamp(13px, 1.2vw, 18px); }
+    .callout span { color: var(--muted); font-size: clamp(11px, 1vw, 15px); line-height: 1.4; }
+
     .codebox {
       min-width: 0;
       max-height: 100%;
       overflow: auto;
-      padding: clamp(16px, 2vw, 26px);
+      padding: clamp(14px, 1.8vw, 22px);
       border-radius: 8px;
       background: var(--code);
       color: #fff8ed;
       box-shadow: var(--shadow);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: clamp(11px, 1.03vw, 15px);
+      font-size: clamp(10px, 0.95vw, 14px);
       line-height: 1.52;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
     }
 
-    .codebox.sm { font-size: clamp(9px, 0.85vw, 13px); line-height: 1.42; }
+    .codebox .dim  { color: #7a8a7a; }
+    .codebox .warn { color: #f2c477; }
+    .codebox .good { color: #8bd3a7; }
 
-    .codebox strong { color: #8bd3a7; font-weight: 850; }
-    .codebox .dim   { color: #7a8a7a; }
-    .codebox .warn  { color: #f2c477; }
-    .codebox .good  { color: #8bd3a7; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 
-    .callout {
-      display: grid;
-      grid-template-columns: 10px 1fr;
-      gap: 14px;
-      align-items: stretch;
-      padding: 16px 18px;
+    .card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 8px;
+      padding: clamp(12px, 1.4vw, 18px);
+      display: grid;
+      gap: 6px;
     }
 
-    .bar { border-radius: 999px; background: var(--green); }
+    .card b { font-size: clamp(13px, 1.2vw, 18px); color: var(--ink); }
+    .card span { font-size: clamp(11px, 0.95vw, 14px); color: var(--muted); line-height: 1.36; }
 
-    .callout b { display: block; margin-bottom: 5px; color: var(--ink); font-size: clamp(15px, 1.35vw, 20px); }
-    .callout span { color: var(--muted); font-size: clamp(12px, 1.05vw, 16px); line-height: 1.42; }
-
-    /* ── 네비게이션 ── */
     .nav {
       position: fixed;
       right: 24px; bottom: 22px;
@@ -226,7 +166,7 @@
       align-items: center;
       gap: 8px;
       padding: 6px;
-      background: rgba(255, 253, 248, 0.88);
+      background: rgba(255, 253, 248, 0.9);
       border: 1px solid rgba(221, 212, 200, 0.94);
       border-radius: 999px;
       box-shadow: 0 14px 42px rgba(32, 34, 38, 0.14);
@@ -234,13 +174,13 @@
     }
 
     .home-btn {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       display: grid; place-items: center;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--surface);
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
       text-decoration: none;
       transition: border-color 150ms, color 150ms;
     }
@@ -248,20 +188,20 @@
     .home-btn:hover { border-color: var(--green); color: var(--green); }
 
     button {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       display: grid; place-items: center;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--surface);
       color: var(--ink);
-      font-size: 22px; font-weight: 750;
+      font-size: 20px; font-weight: 750;
       cursor: pointer;
     }
 
     button:hover { border-color: var(--green); color: var(--green); }
     button:focus-visible { outline: 3px solid rgba(47, 118, 86, 0.28); outline-offset: 2px; }
 
-    .count { min-width: 72px; color: var(--muted); font-size: 13px; font-weight: 850; text-align: center; }
+    .count { min-width: 56px; color: var(--muted); font-size: 13px; font-weight: 850; text-align: center; }
 
     .progress {
       position: fixed; left: 0; bottom: 0; z-index: 11;
@@ -271,347 +211,178 @@
 
     .progress span { display: block; width: 0; height: 100%; background: var(--green); transition: width 180ms ease; }
 
-    /* ── 반응형 ── */
-    @media (max-width: 940px) {
-      .slide {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        padding: clamp(44px, 4vw, 58px) clamp(14px, 4vw, 28px) clamp(14px, 4vw, 28px);
-      }
-      .slide.full { grid-template-columns: 1fr; }
-      h1 { font-size: clamp(28px, 8vw, 42px); }
-      h2 { font-size: clamp(20px, 5.5vw, 34px); }
-      h3 { font-size: 15px; }
-      .lead { margin-top: 10px; font-size: clamp(12px, 3.8vw, 17px); }
-      p, .card span, .callout span, .list { font-size: 10px; }
-      .card, .panel, .callout { padding: 10px; }
-      .codebox { padding: 10px; font-size: 8.5px; }
-      .codebox.sm { font-size: 7.5px; }
-      .mark { width: 24px; height: 24px; font-size: 10px; }
-      .nav { right: 12px; bottom: 10px; }
+    @media (max-width: 900px) {
+      .slide { grid-template-columns: 1fr; align-content: center; gap: 14px; padding: 40px 20px 80px; }
+      h1 { font-size: clamp(32px, 10vw, 52px); }
+      h2 { font-size: clamp(20px, 7vw, 34px); }
+      .codebox { font-size: 10px; }
+      .nav { right: 50%; transform: translateX(50%); bottom: 12px; }
       button, .home-btn { width: 32px; height: 32px; }
-      .home-btn { font-size: 13px; }
-      .count { min-width: 56px; font-size: 11px; }
-    }
-
-    @media (max-width: 560px) {
-      body { display: block; }
-      .deck { width: 100vw; height: 100vh; aspect-ratio: auto; }
-      .slide, .slide.full {
-        grid-template-columns: 1fr;
-        align-content: center;
-        gap: 16px;
-        padding: 52px 20px 96px;
-      }
-      h1 { max-width: 100%; font-size: clamp(40px, 15vw, 58px); }
-      h2 { max-width: 100%; font-size: clamp(28px, 9vw, 42px); }
-      h3 { font-size: 20px; }
-      p, .lead { font-size: 18px; }
-      .kicker { font-size: 12px; }
-      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; margin-top: 14px; }
-      .card, .panel, .callout { min-height: auto; padding: 16px; }
-      .card b, .callout b { font-size: 18px; }
-      .card span, .callout span, .list { font-size: 15px; }
-      .codebox { font-size: 12px; max-height: none; }
-      .codebox.sm { max-height: min(50vh, 400px); overflow: auto; font-size: 11px; }
-      .nav { right: 50%; transform: translateX(50%); }
     }
   </style>
 </head>
 <body>
-  <main class="deck" aria-label="Ponytail 스킬 해설">
+  <main class="deck" aria-label="Ponytail 스킬">
 
-    <div class="chtabs" aria-hidden="true">
-      <span data-ch="1">문제</span>
-      <span data-ch="2">효과</span>
-      <span data-ch="3">사용법</span>
-      <span data-ch="4">안전망</span>
-    </div>
-
-    <!-- ① Cover -->
-    <section class="slide active" data-ch="0" data-title="Cover">
+    <!-- 1 / 5 · 문제 -->
+    <section class="slide active" data-title="문제">
       <div>
-        <p class="kicker">Ponytail Skill</p>
+        <p class="kicker">Ponytail Skill · 01 / 05</p>
         <h1>최적화 요청했더니 엉뚱한 곳을 바꿨나요?</h1>
-        <p class="lead">우선순위도 없고, 왜 바꿨는지 이유도 없고, 동작이 바뀐 것 같기도 하다면 Ponytail이 필요한 순간이다.</p>
-      </div>
-      <div class="panel">
-        <h3>이 자료에서 다루는 것</h3>
-        <div class="list">
-          <span>왜 이 스킬이 필요한가 — 일반 최적화 요청의 문제점</span>
-          <span>켜면 뭐가 달라지는가 — 우선순위·안전성·명확성</span>
-          <span>언제 쓰면 좋은가 — 구체적인 상황</span>
-          <span>안전한가 — 잘못된 최적화를 어떻게 막는가</span>
+        <p class="lead">우선순위도 없고, 이유도 없고, 동작이 바뀐 것 같기도 하다면 Ponytail이 필요한 순간이다.</p>
+        <div class="list" style="margin-top: 20px;">
+          <span>"빠르게 만들어줘" → 변수명을 바꾸고 주석을 지웠다</span>
+          <span>왜 이 함수를 바꿨냐고 물으면 "더 깔끔해 보여서"라고 한다</span>
+          <span>동작이 달라진 건 없냐고 물으면 "같을 거예요"라고 한다</span>
+          <span>실제로 느린 곳이 아닌 루프처럼 보이는 곳을 최적화한다</span>
         </div>
       </div>
-    </section>
+      <pre class="codebox"><span class="warn">이런 상황이 반복된다면:</span>
 
-    <!-- ② 문제: 무차별 최적화 -->
-    <section class="slide" data-ch="1" data-title="문제">
-      <div>
-        <p class="kicker">문제 · "최적화해줘" 한 마디의 위험</p>
-        <h2>어디를 왜 바꿨는지 모르는 코드</h2>
-        <p class="lead">"optimize this"라고 했더니 변수명을 바꾸고, 주석을 지우고, 알 수 없는 리팩터링을 해줬다. 빠르게 됐는지도 모르겠고, 동작이 같은지도 불확실하다.</p>
-      </div>
-      <pre class="codebox"><span class="warn">흔한 문제들:</span>
+<span class="dim">Q: 왜 이 부분을 바꿨나요?</span>
+"전반적으로 더 깔끔해 보여서요."
 
-<span class="dim">— 왜 이 함수를 바꿨나요?
-"전반적으로 더 깔끔해 보여서요"</span>
+<span class="dim">Q: 실제로 여기가 느렸나요?</span>
+"아마도요, 루프가 있으니까요."
 
-<span class="dim">— 이 부분이 실제로 느렸나요?
-"아마도요, 루프가 있으니까요"</span>
-
-<span class="dim">— 동작이 달라진 건 없나요?
-"같을 거예요"</span>
+<span class="dim">Q: 동작이 달라진 건 없나요?</span>
+"같을 거예요."
 
 <span class="good">→ 이 대답들이 불안하다면 Ponytail이 필요하다</span></pre>
     </section>
 
-    <!-- ③ 문제: 구체적인 불편 -->
-    <section class="slide full" data-ch="1" data-title="구체적인 문제">
+    <!-- 2 / 5 · 효과 -->
+    <section class="slide" data-title="효과">
       <div>
-        <p class="kicker">문제 · 일반 최적화 요청의 4가지 문제</p>
-        <h2>왜 그냥 "최적화해줘"는 위험한가</h2>
-        <div class="grid-4">
-          <div class="card">
-            <span class="mark red">1</span>
-            <b>우선순위 없음</b>
-            <span>O(n²) 루프보다 변수명 정리를 먼저 한다. 임팩트와 무관한 순서.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">2</span>
-            <b>동작 변경 위험</b>
-            <span>더 빠른 대신 에러 처리가 빠진다. 속도는 올라가고 안전성은 내려간다.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">3</span>
-            <b>근거 없는 추측</b>
-            <span>프로파일링 없이 "여기가 느릴 것 같아서" 바꾼다. 실제 병목이 다른 곳일 수 있다.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">4</span>
-            <b>범위 초과</b>
-            <span>최적화 요청인데 API 시그니처, 변수명, 코드 구조까지 바꾼다.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ④ 효과: 이 스킬이 하는 것 -->
-    <section class="slide" data-ch="2" data-title="효과">
-      <div>
-        <p class="kicker">효과 · Ponytail이 바꾸는 것</p>
+        <p class="kicker">Ponytail Skill · 02 / 05</p>
         <h2>가장 큰 병목부터. 동작은 절대 안 바꿈.</h2>
-        <p class="lead">우선순위가 정해진 대상 목록을 순서대로 처리한다. 각 변경마다 이유를 명시하고, 동작·API·에러 처리는 손대지 않는다.</p>
+        <p class="lead">우선순위가 정해진 목록을 순서대로 처리한다. 매 변경마다 이유를 명시하고, 동작·API·에러 처리는 손대지 않는다.</p>
+        <div class="stack" style="margin-top: 16px;">
+          <div class="callout">
+            <span class="bar"></span>
+            <div><b>우선순위 순서 (항상 이 순서로)</b><span>O(n²) 루프 → N+1 쿼리 → 불필요한 할당 → 중복 연산 → 사용 안 하는 코드</span></div>
+          </div>
+          <div class="callout">
+            <span class="bar bar-red"></span>
+            <div><b>절대 안 바꾸는 것</b><span>동작, 공개 API 시그니처, 에러 처리</span></div>
+          </div>
+          <div class="callout">
+            <span class="bar bar-blue"></span>
+            <div><b>매 변경마다 알려주는 것</b><span>위치 → 문제 → 수정 → 이유 ("n번 왕복 → 1번 JOIN")</span></div>
+          </div>
+        </div>
       </div>
       <div class="stack">
-        <div class="callout">
-          <span class="bar"></span>
-          <div>
-            <b>우선순위 순서 (항상 이 순서)</b>
-            <span>O(n²) 루프 → N+1 쿼리 → 불필요한 할당 → 중복 연산 → 사용 안 하는 코드</span>
-          </div>
-        </div>
-        <div class="callout">
-          <span class="bar" style="background: var(--blue);"></span>
-          <div>
-            <b>매 변경마다 이렇게 알려준다</b>
-            <span>위치 → 문제 → 수정 → 이유. "n번 왕복 → 1번 JOIN"처럼 구체적으로.</span>
-          </div>
-        </div>
-        <div class="callout">
-          <span class="bar" style="background: var(--red);"></span>
-          <div>
-            <b>절대 바꾸지 않는 것</b>
-            <span>동작, 공개 API 시그니처, 에러 처리 — 관찰 가능한 동작은 변경 없음.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑤ 효과: 실제 before/after -->
-    <section class="slide" data-ch="2" data-title="Before / After">
-      <div>
-        <p class="kicker">효과 · 실제 비교 — N+1 쿼리</p>
-        <h2>팀 수만큼 DB를 치던 코드</h2>
-        <p class="lead">이유 설명 없이 바꾸지 않는다. 무엇이 문제였는지, 왜 더 빠른지 함께 나온다.</p>
-      </div>
-      <div class="stack">
-        <pre class="codebox sm"><span class="warn">Before — N번 쿼리 (팀 수만큼)</span>
+        <pre class="codebox"><span class="warn">Before — N번 쿼리 (팀 수만큼)</span>
 for (const team of teams) {
   users.push(await db.query(
     'SELECT * FROM users WHERE team_id = ?',
     team.id
   ));
 }</pre>
-        <pre class="codebox sm"><span class="good">After — 1번 쿼리</span>
+        <pre class="codebox"><span class="good">After — 1번 쿼리</span>
 const users = await db.query(
   'SELECT * FROM users WHERE team_id IN (?)',
   teams.map(t =&gt; t.id)
 );
-<span class="dim">// getUsersByTeam: N+1 → JOIN. n번 왕복 → 1번.</span></pre>
+<span class="dim">// N+1 → JOIN. n번 왕복 → 1번.</span></pre>
       </div>
     </section>
 
-    <!-- ⑥ 사용법: 켜는 방법 -->
-    <section class="slide" data-ch="3" data-title="켜는 방법">
+    <!-- 3 / 5 · 사용법 -->
+    <section class="slide" data-title="사용법">
       <div>
-        <p class="kicker">사용법 · 이렇게 켠다</p>
+        <p class="kicker">Ponytail Skill · 03 / 05</p>
         <h2>말 한 마디면 된다</h2>
-        <p class="lead">최적화가 필요한 코드를 붙여넣고 트리거 표현을 말하면 즉시 시작된다.</p>
-      </div>
-      <div class="stack">
-        <div class="callout">
-          <span class="bar"></span>
-          <div>
-            <b>영어 트리거</b>
-            <span>"optimize" / "make it faster" / "ponytail" / /ponytail</span>
+        <p class="lead">최적화가 필요한 코드를 붙여넣고 트리거 표현을 말하면 즉시 시작. 현재 작업 단위로만 적용된다.</p>
+        <div class="stack" style="margin-top: 18px;">
+          <div class="callout">
+            <span class="bar"></span>
+            <div><b>켜기</b><span>"optimize" / "make it faster" / "ponytail" / "최적화" / "성능 개선" / /ponytail</span></div>
           </div>
-        </div>
-        <div class="callout">
-          <span class="bar"></span>
-          <div>
-            <b>한국어 트리거</b>
-            <span>"최적화" / "빠르게" / "성능 개선" / "코드 최적화"</span>
+          <div class="callout">
+            <span class="bar bar-yellow"></span>
+            <div><b>특정 블록 건너뛰기</b><span>"skip this one" — 의도적으로 읽기 쉽게 둔 코드는 제외</span></div>
           </div>
-        </div>
-        <div class="callout">
-          <span class="bar" style="background: var(--yellow);"></span>
-          <div>
-            <b>특정 블록 건너뛰기</b>
-            <span>"skip this one" — 의도적으로 읽기 쉽게 둔 코드는 제외할 수 있다.</span>
-          </div>
-        </div>
-        <div class="callout">
-          <span class="bar" style="background: var(--red);"></span>
-          <div>
-            <b>끄는 방법</b>
-            <span>"done" / "stop ponytail" / "완료"</span>
+          <div class="callout">
+            <span class="bar bar-red"></span>
+            <div><b>끄기</b><span>"done" / "stop ponytail" / "완료"</span></div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ⑦ 사용법: 이럴 때 쓰세요 -->
-    <section class="slide full" data-ch="3" data-title="언제 쓰나">
       <div>
-        <p class="kicker">사용법 · Ponytail이 빛나는 상황</p>
-        <h2>이럴 때 켜세요</h2>
-        <div class="grid-4">
+        <h3>이럴 때 효과적이다</h3>
+        <div class="grid-2" style="margin-top: 14px;">
           <div class="card">
-            <span class="mark green">✓</span>
             <b>느린 API 응답</b>
-            <span>DB 왕복이 많거나 루프 안에 쿼리가 있다는 걸 알 때. 가장 큰 병목부터 잡아준다.</span>
+            <span>DB 왕복이 많거나 루프 안에 쿼리가 있을 때.</span>
           </div>
           <div class="card">
-            <span class="mark green">✓</span>
-            <b>코드 리뷰 전</b>
-            <span>PR 올리기 전 성능 이슈를 먼저 잡고 싶을 때. 동작 변경 없이 안전하게.</span>
+            <b>PR 올리기 전</b>
+            <span>성능 이슈를 먼저 잡고 싶을 때. 동작 변경 없이 안전하게.</span>
           </div>
           <div class="card">
-            <span class="mark green">✓</span>
             <b>프로파일러 결과 후</b>
-            <span>병목 위치를 찾았고 어떻게 고쳐야 할지 모를 때. 이유 있는 수정을 제안한다.</span>
+            <span>병목 위치를 찾았고 어떻게 고칠지 모를 때.</span>
           </div>
           <div class="card">
-            <span class="mark green">✓</span>
-            <b>레거시 코드 개선</b>
-            <span>오래된 코드에서 큰 임팩트부터 걷어내고 싶을 때. 범위를 벗어나지 않는다.</span>
+            <b>레거시 코드</b>
+            <span>큰 임팩트부터 걷어내고 싶을 때. 범위를 벗어나지 않는다.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ⑧ 사용법: 작업 범위 -->
-    <section class="slide" data-ch="3" data-title="적용 범위">
+    <!-- 4 / 5 · 안전망 -->
+    <section class="slide" data-title="안전망">
       <div>
-        <p class="kicker">사용법 · 현재 작업에만 적용된다</p>
-        <h2>대화 전체를 최적화 모드로 만들지 않는다</h2>
-        <p class="lead">Caveman과 달리 Ponytail은 현재 작업 단위로만 적용된다. 최적화가 필요한 코드를 논의할 때만 켜고, 끝나면 자동으로 범위를 벗어난다.</p>
-      </div>
-      <div class="panel">
-        <h3>이런 제어가 가능하다</h3>
-        <div class="list">
-          <span>특정 파일만 최적화 — 다른 코드에는 적용 안 함</span>
-          <span>"skip this one" — 의도적으로 남긴 코드는 건너뜀</span>
-          <span>작업 완료 후 "done" — 깔끔하게 종료</span>
-          <span>중간에 다시 켜기 — 다음 파일로 넘어갈 때 다시 트리거</span>
+        <p class="kicker">Ponytail Skill · 04 / 05</p>
+        <h2>데이터 없이 최적화하지 않는다</h2>
+        <p class="lead">프로파일링 데이터 없는 최적화는 가장 흔한 실수다. Ponytail은 이걸 자동으로 막고 이유를 알려준다.</p>
+        <div class="list" style="margin-top: 18px;">
+          <span><b>프로파일링 없음</b> — 실제로 느린지 확인 안 된 코드는 건너뜀</span>
+          <span><b>동작이 바뀌는 수정</b> — 빠르게 만들 수 있어도 결과가 달라지면 적용 안 함</span>
+          <span><b>라이브러리 업그레이드 필요</b> — 적용하지 않고 "이 라이브러리로 바꾸면 빠르다"고만 알림</span>
+          <span><b>의도적으로 읽기 쉬운 코드</b> — 테스트·데모·예제는 건드리지 않음</span>
         </div>
-      </div>
-    </section>
-
-    <!-- ⑨ 안전망: 데이터 없으면 멈춘다 -->
-    <section class="slide" data-ch="4" data-title="안전망">
-      <div>
-        <p class="kicker">안전망 · 데이터 없이 최적화하지 않는다</p>
-        <h2>실제로 느린지 모르면 손대지 않는다</h2>
-        <p class="lead">프로파일링 데이터 없이 "여기가 느릴 것 같다"는 이유로 최적화하는 것은 가장 흔한 실수다. Ponytail은 이걸 자동으로 막는다.</p>
       </div>
       <pre class="codebox"><span class="warn">조기 최적화 예시:</span>
 
-<span class="good">&gt; Skip: No profiling data confirms this loop
-&gt; is a bottleneck.
+<span class="good">&gt; Skip: No profiling data confirms
+&gt; this loop is a bottleneck.
 &gt; Current avg. response time: &lt; 2ms.
 &gt;
 &gt; Optimizing here risks readability loss
 &gt; with no measurable gain.
-&gt; Run a profiler first, then re-invoke /ponytail.</span>
+&gt; Run a profiler first,
+&gt; then re-invoke /ponytail.</span>
 
-<span class="dim">Ponytail resume. Next target: getUsersByTeam N+1.</span></pre>
+<span class="dim">Ponytail resume.
+Next target: getUsersByTeam N+1.</span></pre>
     </section>
 
-    <!-- ⑩ 안전망: 언제 멈추나 -->
-    <section class="slide full" data-ch="4" data-title="멈추는 조건">
+    <!-- 5 / 5 · 정리 -->
+    <section class="slide" data-title="정리">
       <div>
-        <p class="kicker">안전망 · 이 상황에서는 최적화를 건너뛴다</p>
-        <h2>안 하는 것도 최적화다</h2>
-        <div class="grid-4">
-          <div class="card">
-            <span class="mark red">✗</span>
-            <b>프로파일링 데이터 없음</b>
-            <span>실제로 느린지 확인되지 않은 코드는 건너뛰고 이유를 알려준다.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">✗</span>
-            <b>동작이 바뀌는 수정</b>
-            <span>빠르게 만들 수 있어도 결과가 달라진다면 적용하지 않는다.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">✗</span>
-            <b>라이브러리 업그레이드 필요</b>
-            <span>직접 적용하지 않고 "이 라이브러리로 바꾸면 빠르다"고 알려만 준다.</span>
-          </div>
-          <div class="card">
-            <span class="mark red">✗</span>
-            <b>의도적으로 읽기 쉬운 코드</b>
-            <span>테스트·데모·예제 코드는 건드리지 않는다. 목적이 다르다.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑪ Takeaway -->
-    <section class="slide" data-ch="4" data-title="시작하기">
-      <div>
-        <p class="kicker">정리 · 지금 바로 써보세요</p>
+        <p class="kicker">Ponytail Skill · 05 / 05</p>
         <h2>느린 코드에 "ponytail"이라고 말해보세요</h2>
-        <p class="lead">Ponytail은 "빠르게 해줘"와 다르다. 임팩트 순서가 정해져 있고, 이유가 설명되고, 동작은 절대 바뀌지 않는 구조적인 최적화다.</p>
+        <p class="lead">Ponytail은 "빠르게 해줘"와 다르다. 임팩트 순서가 정해져 있고, 이유가 설명되고, 동작은 절대 바뀌지 않는 구조적 최적화다.</p>
+        <div class="stack" style="margin-top: 20px;">
+          <div class="callout">
+            <span class="bar"></span>
+            <div><b>지금 바로 써보기</b><span>느린 코드를 붙여넣고 "ponytail" 또는 "최적화"라고 입력하면 즉시 시작된다.</span></div>
+          </div>
+          <div class="callout">
+            <span class="bar bar-blue"></span>
+            <div><b>스킬 파일 설치</b><span>SKILL.md를 Claude 설정에 추가하면 /ponytail 슬래시 커맨드로도 켤 수 있다.</span></div>
+          </div>
+        </div>
       </div>
-      <div class="stack">
-        <div class="callout">
-          <span class="bar"></span>
-          <div>
-            <b>지금 바로 써보기</b>
-            <span>느린 코드를 붙여넣고 "ponytail" 또는 "최적화"라고 입력하면 즉시 시작된다.</span>
-          </div>
-        </div>
-        <div class="callout">
-          <span class="bar" style="background: var(--blue);"></span>
-          <div>
-            <b>스킬 파일 설치</b>
-            <span>SKILL.md를 Claude 설정에 추가하면 /ponytail 슬래시 커맨드로도 켤 수 있다.</span>
-          </div>
-        </div>
+      <div class="panel">
+        <h3>한 문장 요약</h3>
+        <p style="margin-top: 12px; font-size: clamp(14px, 1.35vw, 20px); line-height: 1.48; color: #2e3240;">
+          최적화 스킬은 "빠르게 해줘"가 아니라, 무엇을 먼저·어디까지·언제 멈출지를 규정한 규격이다. 우선순위와 안전망이 있어야 진짜 최적화다.
+        </p>
       </div>
     </section>
 
@@ -620,7 +391,7 @@ const users = await db.query(
   <nav class="nav" aria-label="슬라이드 이동">
     <a class="home-btn" href="../" title="목록으로" aria-label="목록으로">↩</a>
     <button type="button" id="prev" aria-label="이전">‹</button>
-    <span class="count" id="count">1 / 11</span>
+    <span class="count" id="count">1 / 5</span>
     <button type="button" id="next" aria-label="다음">›</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>
@@ -629,7 +400,6 @@ const users = await db.query(
     const slides = Array.from(document.querySelectorAll(".slide"));
     const countEl = document.querySelector("#count");
     const progressEl = document.querySelector("#progress");
-    const chTabs = document.querySelectorAll(".chtabs span");
     let index = 0;
 
     function update(target) {
@@ -637,8 +407,6 @@ const users = await db.query(
       slides.forEach((s, i) => s.classList.toggle("active", i === index));
       countEl.textContent = `${index + 1} / ${slides.length}`;
       progressEl.style.width = `${((index + 1) / slides.length) * 100}%`;
-      const ch = slides[index].dataset.ch || "0";
-      chTabs.forEach(t => t.classList.toggle("on", t.dataset.ch === ch));
       const hash = `slide-${index + 1}`;
       if (location.hash !== `#${hash}`) history.replaceState(null, "", `#${hash}`);
     }
